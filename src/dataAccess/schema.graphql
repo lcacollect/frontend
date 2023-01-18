@@ -1,0 +1,74 @@
+query getProjectSchemas($projectId: String!) {
+  reportingSchemas(projectId: $projectId) {
+    id
+    name
+  }
+}
+
+mutation addReportingSchemaFromTemplate($templateId: String!, $name: String, $projectId: String!) {
+  addReportingSchemaFromTemplate(templateId: $templateId, name: $name, projectId: $projectId) {
+    id
+    name
+  }
+}
+
+query getSchemaTemplates {
+  schemaTemplates {
+    id
+    name
+    schema {
+      name
+      id
+    }
+  }
+}
+
+query getSingleProject($id: String!) {
+  projects(filters: { id: { equal: $id } }) {
+    id
+    projectId
+    name
+    client
+    domain
+    address
+    city
+    country
+    metaFields
+    imageUrl
+  }
+}
+
+mutation updateProject(
+  $id: String!
+  $name: String = null
+  $projectId: String = null
+  $client: String = null
+  $address: String = null
+  $city: String = null
+  $country: String = null
+  $domain: ProjectDomain = null
+  $metaFields: JSON = null
+  $file: String = null
+) {
+  updateProject(
+    id: $id
+    name: $name
+    projectId: $projectId
+    client: $client
+    address: $address
+    city: $city
+    country: $country
+    domain: $domain
+    metaFields: $metaFields
+    file: $file
+  ) {
+    name
+    imageUrl
+  }
+}
+
+query getAccountRoles {
+  account {
+    roles
+  }
+}

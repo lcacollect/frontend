@@ -1,0 +1,24 @@
+{
+  "extends": "@tsconfig/vite-react/tsconfig.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "esModuleInterop": false,
+    "useDefineForClassFields": true,
+    "lib": ["es5", "es2017", "dom"],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "types": ["vite/client", "node", "cypress"],
+    "jsx": "react-jsx"
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "**/*.spec.tsx", "**/__mocks__/*.*"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
