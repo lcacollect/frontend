@@ -18,6 +18,7 @@ variables:
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
   isPR: $[eq(variables['Build.Reason'], 'PullRequest')]
   workingDirectory: $(System.DefaultWorkingDirectory)
+  azureSubscription: 'LCAcollect DEV Storage Account'
 
 stages:
   - stage: Test
@@ -41,3 +42,4 @@ stages:
           vmImageName: $(vmImageName)
           sourceDirectory: $(workingDirectory)
           storageAccount: $(storage-account)
+          azureSubscription: $(azureSubscription)
