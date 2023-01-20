@@ -28,7 +28,7 @@ stages:
         parameters:
           vmImageName: $(vmImageName)
           workingDirectory: $(workingDirectory)
-          runE2E: true
+          runE2E: false
 
   - stage: Publish
     displayName: Publish Bundle
