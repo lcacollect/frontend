@@ -15,11 +15,11 @@ export default defineConfig({
   },
   optimizeDeps: {
     exclude: [
-      // '@lca/shared-documentation-frontend',
-      // '@lca/shared-project-frontend',
-      // '@lca/shared-core-frontend',
-      // '@lca/shared-components-frontend',
-      // '@lca/shared-e2e-testing-frontend',
+      // '@lcacollect/documentation',
+      // '@lcacollect/project',
+      // '@lcacollect/core',
+      // '@lcacollect/components',
+      // '@lcacollect/e2e-testing',
     ],
     esbuildOptions: {
       // Node.js global to browser globalThis
@@ -40,7 +40,7 @@ export default defineConfig({
     fs: {
       allow: [
         searchForWorkspaceRoot(process.cwd()),
-        '../components/node_modules/@fontsource/roboto/files/',
+        '../shared-components-frontend/node_modules/@fontsource/roboto/files/',
       ],
     },
   },
