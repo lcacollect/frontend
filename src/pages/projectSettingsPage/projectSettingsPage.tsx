@@ -5,7 +5,8 @@ import { useGetSingleProjectQuery } from '../../dataAccess'
 import { DataFetchWrapper, PaperPage, PaperPageStack } from '@lcacollect/components'
 import { BuildingImageUpload, ProjectInformation } from '@lcacollect/project'
 import { ProjectSchemaSelection } from '../../components'
-import { BuildingInformation, BuildingEnergyInformation } from '../../components/projectSettings'
+import { BuildingInformation } from '../../components/projectSettings'
+import { BuildingEnergyInformation } from '../../components/buildingEnergyInformation'
 
 export const ProjectSettingsPage = () => {
   const { projectId } = useParams()

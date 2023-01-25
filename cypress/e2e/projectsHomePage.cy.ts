@@ -21,8 +21,8 @@ describe('Projects Home Page', () => {
         resolver: () => adminAccountData.data,
       })
 
-    cy.visit('/');
-  });
+    cy.visit('/')
+  })
 
   it('should list projects', () => {
     cy.get('[data-testid=recent-projects]').contains('Recent Projects')

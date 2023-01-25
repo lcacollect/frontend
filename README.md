@@ -46,6 +46,7 @@ You can use `npm link` to set up live reloading of the other `@lca` packages.
   the changes will available here.
 
 ## Folder Structure and Naming
+
 ```python
 cypress/ # Contains E2E tests
     e2e/ # The tests themselves

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { CardTitle, InnerPaper } from '@lcacollect/components'
 import { Alert, AlertProps, Snackbar, Stack } from '@mui/material'
-import { ProjectMetaFieldInput } from './metaFieldInput'
+import { ProjectMetaFieldInput } from '../projectSettings/metaFieldInput'
 
 export interface InformationCardProps {
   metaFields: { [key: string]: any }
@@ -35,7 +35,7 @@ export const BuildingEnergyInformation: React.FC<InformationCardProps> = (props)
   return (
     <InnerPaper data-testid='building-energy-information-table'>
       <CardTitle title='Building Energy Use' size='medium' />
-      <Stack spacing={2} sx={{ marginTop: 2 }}>
+      <Stack spacing={2} sx={{ marginTop: 2 }} data-testid='building-energy-info-stack'>
         {fields.map(({ id, label, options, type }, index) => (
           <ProjectMetaFieldInput
             label={label}
@@ -49,14 +49,16 @@ export const BuildingEnergyInformation: React.FC<InformationCardProps> = (props)
           />
         ))}
       </Stack>
+      <div>test test</div>
       {!!snackbar && (
         <Snackbar
           open
           anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
           onClose={() => setSnackbar(null)}
           autoHideDuration={6000}
+          data-testid='snackbar'
         >
-          <Alert {...snackbar} onClose={() => setSnackbar(null)} />
+          <Alert {...snackbar} onClose={() => setSnackbar(null)} data-testid='alert' />
         </Snackbar>
       )}
     </InnerPaper>
