@@ -77,13 +77,13 @@ describe('BuildingEnergyInformation', () => {
     // Trigger the setError
     act(() => {
       const firstInput = stack.querySelector('input')
-      console.log('first input ', firstInput)
+      // console.log('first input ', firstInput)
       firstInput?.dispatchEvent(new Event('blur'))
     })
-    const innerPaper = getByTestId('building-energy-information-table')
-    console.log('innerpaper ', innerPaper)
-    console.log('innerpaper inner ', innerPaper.innerHTML)
-    console.log('innerpaper children', innerPaper.children)
+    // const innerPaper = getByTestId('building-energy-information-table')
+    // console.log('innerpaper ', innerPaper)
+    // console.log('innerpaper inner ', innerPaper.innerHTML)
+    // console.log('innerpaper children', innerPaper.children)
 
     //   const snackbar = getByTestId('snackbar')
     //   expect(snackbar).toBeInTheDocument()
