@@ -1,6 +1,6 @@
 import { DataFetchWrapper, AutoSaveCheckMark } from '@lcacollect/components'
 import { Alert, AlertProps, Autocomplete, Snackbar, TextField } from '@mui/material'
-import React, { SyntheticEvent, useState } from 'react'
+import React, { SyntheticEvent, useEffect, useState } from 'react'
 import {
   GetProjectSchemasDocument,
   GraphQlSchemaTemplate,
@@ -38,6 +38,16 @@ export const ProjectSchemaSelection = (props: ProjectSchemaSelectionProps) => {
     },
     skip: !projectId,
   })
+
+  useEffect(() => {
+    console.log('schematemplates; data, loading, error', schemaTemplateData, schemaTemplateLoading, schemaTemplateError)
+    console.log(
+      'useGetProjectSchemasQuery; data, loading, error',
+      projectSchemaData,
+      projectSchemaLoading,
+      projectSchemaError,
+    )
+  }, [])
 
   const handleSchemaChange = async (event: SyntheticEvent, template: GraphQlSchemaTemplate | null | undefined) => {
     if (!template) {
