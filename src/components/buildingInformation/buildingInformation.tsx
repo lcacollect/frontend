@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { CardTitle, InnerPaper } from '@lcacollect/components'
 import { Alert, AlertProps, Snackbar, Stack } from '@mui/material'
-import { InformationCardProps } from '../projectSettings/buildingEnergyInformation'
+import { InformationCardProps } from '../buildingEnergyInformation/buildingEnergyInformation'
 import { ProjectMetaFieldInput } from '../projectSettings/metaFieldInput'
 
 export const BuildingInformation: React.FC<InformationCardProps> = (props) => {
