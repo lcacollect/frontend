@@ -33,6 +33,7 @@ export default {
           { id: 'finished_date', label: 'Construction finished in', type: 'year' },
         ],
         file: null,
+        imageUrl: 'https://somewhere.com/image',
       },
     ],
   },
