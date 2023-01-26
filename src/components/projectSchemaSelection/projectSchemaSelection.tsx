@@ -1,6 +1,6 @@
 import { DataFetchWrapper, AutoSaveCheckMark } from '@lcacollect/components'
 import { Alert, AlertProps, Autocomplete, Snackbar, TextField } from '@mui/material'
-import React, { SyntheticEvent, useState } from 'react'
+import React, { SyntheticEvent, useEffect, useState } from 'react'
 import {
   GetProjectSchemasDocument,
   GraphQlSchemaTemplate,
@@ -39,6 +39,16 @@ export const ProjectSchemaSelection = (props: ProjectSchemaSelectionProps) => {
     skip: !projectId,
   })
 
+  useEffect(() => {
+    console.log('schematemplates; data, loading, error', schemaTemplateData, schemaTemplateLoading, schemaTemplateError)
+    console.log(
+      'useGetProjectSchemasQuery; data, loading, error',
+      projectSchemaData,
+      projectSchemaLoading,
+      projectSchemaError,
+    )
+  }, [])
+
   const handleSchemaChange = async (event: SyntheticEvent, template: GraphQlSchemaTemplate | null | undefined) => {
     if (!template) {
       return null
@@ -69,6 +79,7 @@ export const ProjectSchemaSelection = (props: ProjectSchemaSelectionProps) => {
       loading={schemaTemplateLoading || projectSchemaLoading}
     >
       <Autocomplete
+        data-testid='auto-complete'
         aria-label='reporting-schema-selector'
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
@@ -81,6 +92,7 @@ export const ProjectSchemaSelection = (props: ProjectSchemaSelectionProps) => {
         isOptionEqualToValue={(option, value) => option.name === value.name}
         renderInput={(params) => (
           <TextField
+            data-testid='text-field'
             {...params}
             label='Reporting Schema'
             variant='standard'
