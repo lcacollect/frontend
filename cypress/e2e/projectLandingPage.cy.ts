@@ -31,7 +31,7 @@ describe('Project Landing Page', () => {
               name: 'Martin',
               leaderOf: null,
               lastLogin: null,
-              projectGroups: null
+              projectGroups: null,
             },
           ],
         }),

@@ -18,14 +18,15 @@ describe('Project Tasks Page', () => {
       name: 'New Assignee Name',
     },
     status: TaskStatus.Pending,
-    comments: [{
-      id: 'newCommentId',
-      text: 'New Comment Text',
-      added: '2020-02-02',
-      authorId: ''
-    }],
-    author: existingTask.author
-
+    comments: [
+      {
+        id: 'newCommentId',
+        text: 'New Comment Text',
+        added: '2020-02-02',
+        authorId: '',
+      },
+    ],
+    author: existingTask.author,
   } as GraphQlTask
 
   beforeEach(() => {
@@ -40,7 +41,7 @@ describe('Project Tasks Page', () => {
     cy.mockGraphql(schema)
       .mockGraphqlOps<OPERATIONS, 'getCommentsForTask', OPERATIONS['getCommentsForTask']>('getCommentsForTask', {
         resolver: ({ variables: taskId }) => ({
-          comments: existingTask.comments
+          comments: existingTask.comments,
         }),
       })
       .mockGraphqlOps<OPERATIONS, 'getSingleProject', OPERATIONS['getSingleProject']>('getSingleProject', {
@@ -105,7 +106,7 @@ describe('Project Tasks Page', () => {
     })
     cy.url().should('include', 'components')
   })
-  
+
   it('should be possible to edit a task', () => {
     // Open Dialog
     cy.get(`[data-id=${existingTask.id}]`).click()

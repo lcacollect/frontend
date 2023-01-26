@@ -47,7 +47,7 @@ describe('Project Member Creation Flow', () => {
         projectId: projectId,
         userId: existingProjectMember.userId,
       },
-      newProjectMember
+      newProjectMember,
     ],
   } as GraphQlProjectGroup
 
@@ -127,9 +127,12 @@ describe('Project Member Creation Flow', () => {
 
     cy.get('[data-testid=AddIcon]').first().click()
 
-    cy.get('[data-id]').first().next().within(() => {
-      cy.get('[data-field=email]').type(newProjectMember.email)
-    })
+    cy.get('[data-id]')
+      .first()
+      .next()
+      .within(() => {
+        cy.get('[data-field=email]').type(newProjectMember.email)
+      })
 
     cy.get('[data-testid=SaveIcon]').first().click()
   })
