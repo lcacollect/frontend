@@ -20,10 +20,9 @@ export const ProjectSettingsPage = () => {
     <PaperPageStack data-testid='project-settings-page'>
       <PaperPage>
         <DataFetchWrapper loading={loading} error={error} data-testid='data-fetch-wrapper'>
-          <Grid container spacing={2}>
-            <Grid item sm={12} md={6} xl={3}>
+          <Grid container spacing={2} data-testid='grid'>
+            <Grid item sm={12} md={6} xl={3} data-testid='project-information'>
               <ProjectInformation
-                data-testid='project-information'
                 project={data?.projects[0]}
                 selectionDropdown={<ProjectSchemaSelection projectId={projectId || ''} />}
               />
@@ -35,7 +34,7 @@ export const ProjectSettingsPage = () => {
               <BuildingEnergyInformation projectId={projectId || ''} metaFields={data?.projects[0].metaFields} />
             </Grid>
             <Grid item sm={12} md={6} xl={3}>
-              <BuildingImageUpload />
+              <BuildingImageUpload data-testid='image-upload' />
             </Grid>
           </Grid>
         </DataFetchWrapper>

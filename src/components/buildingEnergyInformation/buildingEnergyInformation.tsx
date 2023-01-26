@@ -49,7 +49,6 @@ export const BuildingEnergyInformation: React.FC<InformationCardProps> = (props)
           />
         ))}
       </Stack>
-      <div>test test</div>
       {!!snackbar && (
         <Snackbar
           open

@@ -18,45 +18,24 @@ describe('ProjectSettingsPage', () => {
           </Routes>
         </MemoryRouter>
       </MockedProvider>,
-      {
-        wrapper: ({ children }) => {
-          console.log('request', children.props.mocks[0])
-          console.log('result', children.props.mocks[0].result)
-          console.log('result', children.props.mocks[0].result.data)
-          console.log('result', children.props.mocks[0].result.data.projects)
-          return children
-        },
-      },
+    )
+    expect(baseElement).toBeDefined()
+  })
+  it('should render child elements successfully', async () => {
+    const { baseElement } = render(
+      <MockedProvider mocks={projectMock} addTypename={false}>
+        <MemoryRouter initialEntries={['/projects/acfa456f-6628-4c0d-a0c8-1a53b1a46785/settings']}>
+          <Routes>
+            <Route path='/projects/:projectId/settings' element={<ProjectSettingsPage />} />
+          </Routes>
+        </MemoryRouter>
+      </MockedProvider>,
     )
     expect(baseElement).toBeDefined()
     expect(await screen.findByTestId('project-settings-page')).toBeInTheDocument()
-    console.log('base element innerHTML', baseElement.innerHTML)
-    expect(await screen.findByTestId('data-fetch-wrapper')).toBeInTheDocument()
-    console.log('projectmock result', projectMock[0].result.data)
-    console.log('projectmock', projectMock[0].request)
-    console.log('projectmock', projectMock[0].request.query)
-    console.log('projectmock', projectMock[0].request.query.definitions[0])
-    console.log('projectmock', projectMock[0].request.query.definitions[0].kind)
-
-    // // console.log('baseElement ', baseElement)
-    // console.log('baseElement inner', container.innerHTML)
-    // // console.log('baseElement children ', baseElement.children)
-    // expect(await screen.findByTestId('project-settings-page')).toBeInTheDocument()
-    // expect(await screen.findByTestId('project-information')).toBeInTheDocument()
+    expect(await screen.findByTestId('project-information-table')).toBeInTheDocument()
+    expect(await screen.findByText('Building Information')).toBeInTheDocument()
+    expect(await screen.findByText('Building Energy Use')).toBeInTheDocument()
+    expect(await screen.findByTestId('image-upload')).toBeInTheDocument()
   })
-
-  //   it('should render successfully', async () => {
-  //     const { getByTestId } = render(
-  //         <MockedProvider mocks={projectMock} addTypename={false} >
-  //         <MemoryRouter initialEntries={['/projects/acfa456f-6628-4c0d-a0c8-1a53b1a46785/settings']}>
-  //           <Routes >
-  //             <Route path='/projects/:projectId/settings'  element={<ProjectSettingsPage />} />
-  //           </Routes>
-  //         </MemoryRouter>
-  //       </MockedProvider>,
-  //     )
-
-  //     const dataWrapper = getByTestId('data-fetch-wrapper')
-  //     console.log('datafetchwrapepr', dataWrapper)
-  //   })
 })
