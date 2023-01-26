@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { render, screen, cleanup, waitFor } from '@testing-library/react'
+import { render, screen, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
