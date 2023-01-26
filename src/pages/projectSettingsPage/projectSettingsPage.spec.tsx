@@ -5,7 +5,7 @@ import React from 'react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { MockedProvider } from '@apollo/client/testing'
 import { ProjectSettingsPage } from './projectSettingsPage'
-import { projectMock } from '../../__mocks__/projectMock'
+import { projectMock } from '../../__mocks__/project.mock'
 
 describe('ProjectSettingsPage', () => {
   afterEach(cleanup)

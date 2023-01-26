@@ -20,6 +20,7 @@ interface ProjectMetaFieldInputProps {
 
 export const ProjectMetaFieldInput: React.FC<ProjectMetaFieldInputProps> = (props) => {
   const { id, label, data = '', projectId, setError, options, type = 'string' } = props
+  const dataTestId = `meta-field-input-${id}`
   const [value, setValue] = React.useState(data || '')
   const [localError, setLocalError] = useState<ApolloError>()
   const [updateProject, { loading }] = useUpdateProjectMutation({
@@ -58,6 +59,7 @@ export const ProjectMetaFieldInput: React.FC<ProjectMetaFieldInputProps> = (prop
         options={options}
         renderInput={(params) => (
           <TextField
+            data-testid={dataTestId}
             {...params}
             label={label}
             variant='standard'
@@ -91,6 +93,7 @@ export const ProjectMetaFieldInput: React.FC<ProjectMetaFieldInputProps> = (prop
           }}
           renderInput={(params) => (
             <TextField
+              data-testid={dataTestId}
               id={id}
               variant='standard'
               {...params}
@@ -114,6 +117,7 @@ export const ProjectMetaFieldInput: React.FC<ProjectMetaFieldInputProps> = (prop
   }
   return (
     <TextField
+      data-testid={dataTestId}
       id={id}
       label={label}
       type={type}

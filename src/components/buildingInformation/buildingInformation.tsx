@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
 import { CardTitle, InnerPaper } from '@lcacollect/components'
 import { Alert, AlertProps, Snackbar, Stack } from '@mui/material'
-import { InformationCardProps } from '../buildingEnergyInformation/buildingEnergyInformation'
-import { ProjectMetaFieldInput } from '../projectSettings/metaFieldInput'
+import React, { useState } from 'react'
+import { ProjectMetaFieldInput } from '../metaFieldInput'
+import { InformationCardProps } from '../buildingEnergyInformation'
 
 export const BuildingInformation: React.FC<InformationCardProps> = (props) => {
   const { metaFields, projectId } = props
