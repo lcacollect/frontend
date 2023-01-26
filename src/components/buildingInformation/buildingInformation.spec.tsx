@@ -48,7 +48,10 @@ describe('BuildingInformation', () => {
       <MockedProvider mocks={updateProjectMock} addTypename={false}>
         <BrowserRouter>
           <Routes>
-            <Route path='*' element={<BuildingInformation metaFields={{}} projectId='1' />} />
+            <Route
+              path='*'
+              element={<BuildingInformation metaFields={{}} projectId='acfa456f-6628-4c0d-a0c8-1a53b1a46785' />}
+            />
           </Routes>
         </BrowserRouter>
       </MockedProvider>,
@@ -60,6 +63,9 @@ describe('BuildingInformation', () => {
       const firstInput = stack.querySelector('input')
       firstInput?.dispatchEvent(new Event('blur'))
     })
+
+    const firstInput = stack.querySelector('input')
+    firstInput?.dispatchEvent(new Event('blur'))
     const innerPaper = getByTestId('building-information-table')
     console.log('inner paper:', innerPaper)
     console.log('inner paper: html', innerPaper.innerHTML)
