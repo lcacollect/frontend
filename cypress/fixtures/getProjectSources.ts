@@ -9,7 +9,7 @@ export default {
         type: ProjectSourceType.Csv,
         dataId: 'path/to/file/016c28e7-6305-40c9-8b2a-aa97f051051a',
         authorId: 'ee98a85a-22ae-475f-9c95-8848bb1b3d5c',
-        author: {name: 'My Name', id: 'ee98a85a-22ae-475f-9c95-8848bb1b3d5c'},
+        author: { name: 'My Name', id: 'ee98a85a-22ae-475f-9c95-8848bb1b3d5c' },
         updated: '2022-10-27T09:37:23.272488',
         metaFields: {},
         interpretation: {
@@ -28,7 +28,7 @@ export default {
         type: ProjectSourceType.Csv,
         dataId: 'path/to/file/43a7b09b-4d0e-41e0-b116-c43b91e3e596',
         authorId: 'ee98a85a-22ae-475f-9c95-8848bb1b3d5c',
-        author: {name: 'My Name', id: 'ee98a85a-22ae-475f-9c95-8848bb1b3d5c'},
+        author: { name: 'My Name', id: 'ee98a85a-22ae-475f-9c95-8848bb1b3d5c' },
         updated: '2022-10-27T10:27:09.083359',
         metaFields: {},
         interpretation: {
@@ -44,7 +44,7 @@ export default {
         type: ProjectSourceType.Csv,
         authorId: 'ee98a85a-22ae-475f-9c95-8848bb1b3d5c',
         dataId: 'ee98a85a-22ae-475f-9c95-8848bb1b3d5c',
-        author: {name: 'My Name', id: 'ee98a85a-22ae-475f-9c95-8848bb1b3d5c'},
+        author: { name: 'My Name', id: 'ee98a85a-22ae-475f-9c95-8848bb1b3d5c' },
         updated: '2022-10-27T10:27:19.087338',
         metaFields: {},
         interpretation: {},

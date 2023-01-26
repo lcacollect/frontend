@@ -1,8 +1,8 @@
 /// <reference types="cypress" />
-import { schema, GraphQlSchemaTemplate } from '../../src/dataAccess';
-import adminAccountData from '../fixtures/getAdminAccount';
-import schemaTemplatesData from '../fixtures/getSchemaTemplates';
-import { OPERATIONS } from '../support/operations';
+import { schema, GraphQlSchemaTemplate } from '../../src/dataAccess'
+import adminAccountData from '../fixtures/getAdminAccount'
+import schemaTemplatesData from '../fixtures/getSchemaTemplates'
+import { OPERATIONS } from '../support/operations'
 
 describe('Admin Page', () => {
   const existingSchemaTemplate = schemaTemplatesData.data.schemaTemplates[0]
@@ -12,8 +12,8 @@ describe('Admin Page', () => {
     schema: {
       id: '',
       name: 'BIM7AA',
-      projectId: 'COWI 1'
-    }
+      projectId: 'COWI 1',
+    },
   } as GraphQlSchemaTemplate
 
   beforeEach(() => {
@@ -30,7 +30,7 @@ describe('Admin Page', () => {
       })
       .mockGraphqlOps<OPERATIONS, 'getAccountRoles', OPERATIONS['getAccountRoles']>('getAccountRoles', {
         resolver: () => ({
-          account: { roles: adminAccountData.data.account.roles}
+          account: { roles: adminAccountData.data.account.roles },
         }),
       })
 
@@ -43,7 +43,7 @@ describe('Admin Page', () => {
       cy.get('[data-field=name]').contains(existingSchemaTemplate.name)
       cy.get('[data-field=typecode]').contains(existingSchemaTemplate.schema.name)
     })
-    
+
     cy.get('[data-testid=DeleteOutlinedIcon]').first().click()
   })
 
