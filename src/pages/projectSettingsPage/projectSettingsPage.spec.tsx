@@ -18,25 +18,25 @@ describe('ProjectSettingsPage', () => {
           </Routes>
         </MemoryRouter>
       </MockedProvider>,
-      //   {
-      //     wrapper: ({ children }) => {
-      //       console.log('request',children.props.mocks[0]);
-      //       console.log('result',children.props.mocks[0].result);
-      //       console.log('result',children.props.mocks[0].result.data);
-      //       console.log('result',children.props.mocks[0].result.data.projects);
-      //       return children;
-      //     },
-      //   }
+      {
+        wrapper: ({ children }) => {
+          console.log('request', children.props.mocks[0])
+          console.log('result', children.props.mocks[0].result)
+          console.log('result', children.props.mocks[0].result.data)
+          console.log('result', children.props.mocks[0].result.data.projects)
+          return children
+        },
+      },
     )
     expect(baseElement).toBeDefined()
     expect(await screen.findByTestId('project-settings-page')).toBeInTheDocument()
     console.log('base element innerHTML', baseElement.innerHTML)
     expect(await screen.findByTestId('data-fetch-wrapper')).toBeInTheDocument()
-    // console.log('projectmock result', projectMock[0].result.data)
-    // console.log('projectmock', projectMock[0].request)
-    // console.log('projectmock', projectMock[0].request.query)
-    // console.log('projectmock', projectMock[0].request.query.definitions[0])
-    // console.log('projectmock', projectMock[0].request.query.definitions[0].kind)
+    console.log('projectmock result', projectMock[0].result.data)
+    console.log('projectmock', projectMock[0].request)
+    console.log('projectmock', projectMock[0].request.query)
+    console.log('projectmock', projectMock[0].request.query.definitions[0])
+    console.log('projectmock', projectMock[0].request.query.definitions[0].kind)
 
     // // console.log('baseElement ', baseElement)
     // console.log('baseElement inner', container.innerHTML)
