@@ -48,7 +48,6 @@ export const BuildingInformation: React.FC<InformationCardProps> = (props) => {
           />
         ))}
       </Stack>
-      <div>djkffj</div>
       {!!snackbar && (
         <Snackbar
           open
