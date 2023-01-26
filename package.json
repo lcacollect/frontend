@@ -14,6 +14,7 @@
     "lint": "eslint src/**/*.{tsx,ts}",
     "lint:fix": "eslint --fix src/**/*.{tsx,ts}",
     "test": "vitest run",
+    "test:ui": "vitest --ui",
     "codegen": "graphql-codegen --config codegen.yml",
     "format:fix": "prettier --write src/",
     "format": "prettier --check src/"
@@ -60,6 +61,7 @@
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
     "@vitejs/plugin-react": "^2.1.0",
+    "@vitest/ui": "^0.28.2",
     "babel-eslint": "^10.1.0",
     "copyfiles": "^2.4.1",
     "cypress": "^12.1.0",
