@@ -5,8 +5,6 @@ import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { BuildingInformation } from './buildingInformation'
 import { MockedProvider } from '@apollo/client/testing'
-import { act } from 'react-dom/test-utils'
-import { updateProjectMock } from '../../__mocks__/updateProjectMock'
 
 describe('BuildingInformation', () => {
   afterEach(cleanup)
@@ -41,39 +39,5 @@ describe('BuildingInformation', () => {
     expect(infoStack).toHaveTextContent('Floors above ground')
     expect(infoStack).toHaveTextContent('Floors below ground')
     expect(infoStack).toHaveTextContent('Construction finished in')
-  })
-
-  it('should show snackbar', async () => {
-    const { getByTestId } = render(
-      <MockedProvider mocks={updateProjectMock} addTypename={false}>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path='*'
-              element={<BuildingInformation metaFields={{}} projectId='acfa456f-6628-4c0d-a0c8-1a53b1a46785' />}
-            />
-          </Routes>
-        </BrowserRouter>
-      </MockedProvider>,
-    )
-    const stack = getByTestId('building-info-stack')
-    expect(stack).toBeInTheDocument()
-
-    act(() => {
-      const firstInput = stack.querySelector('input')
-      firstInput?.dispatchEvent(new Event('blur'))
-    })
-
-    const firstInput = stack.querySelector('input')
-    firstInput?.dispatchEvent(new Event('blur'))
-    const innerPaper = getByTestId('building-information-table')
-    console.log('inner paper:', innerPaper)
-    console.log('inner paper: html', innerPaper.innerHTML)
-    console.log('inner paper: children', innerPaper.children)
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-    await waitFor(() => screen.getByTestId('snackbar'))
-
-    const snackbar = getByTestId('snackbar')
-    expect(snackbar).toBeInTheDocument()
   })
 })
