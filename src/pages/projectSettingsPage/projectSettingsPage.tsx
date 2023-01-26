@@ -5,7 +5,8 @@ import { useGetSingleProjectQuery } from '../../dataAccess'
 import { DataFetchWrapper, PaperPage, PaperPageStack } from '@lcacollect/components'
 import { BuildingImageUpload, ProjectInformation } from '@lcacollect/project'
 import { ProjectSchemaSelection } from '../../components'
-import { BuildingInformation, BuildingEnergyInformation } from '../../components/projectSettings'
+import { BuildingInformation } from '../../components/buildingInformation'
+import { BuildingEnergyInformation } from '../../components/buildingEnergyInformation'
 
 export const ProjectSettingsPage = () => {
   const { projectId } = useParams()
@@ -18,9 +19,9 @@ export const ProjectSettingsPage = () => {
   return (
     <PaperPageStack data-testid='project-settings-page'>
       <PaperPage>
-        <DataFetchWrapper loading={loading} error={error}>
-          <Grid container spacing={2}>
-            <Grid item sm={12} md={6} xl={3}>
+        <DataFetchWrapper loading={loading} error={error} data-testid='data-fetch-wrapper'>
+          <Grid container spacing={2} data-testid='grid'>
+            <Grid item sm={12} md={6} xl={3} data-testid='project-information'>
               <ProjectInformation
                 project={data?.projects[0]}
                 selectionDropdown={<ProjectSchemaSelection projectId={projectId || ''} />}
@@ -33,7 +34,7 @@ export const ProjectSettingsPage = () => {
               <BuildingEnergyInformation projectId={projectId || ''} metaFields={data?.projects[0].metaFields} />
             </Grid>
             <Grid item sm={12} md={6} xl={3}>
-              <BuildingImageUpload />
+              <BuildingImageUpload data-testid='image-upload' />
             </Grid>
           </Grid>
         </DataFetchWrapper>
