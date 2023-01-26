@@ -44,22 +44,22 @@ describe('BuildingEnergyInformation', () => {
     const metaFields = [
       { id: 'heated_area', label: 'Heated Area (m²)', type: 'number' },
       { id: 'heat_usage', label: 'Heat use (kWh/m²/yr)', type: 'number' },
-      //   { id: 'electricity_usage', label: 'Electricity use (kWh/m²/yr)', type: 'number' },
-      //   { id: 'electricity_exported', label: 'Electricity exported to grid (kWh/m²/yr)', type: 'number' },
-      //   {
-      //     id: 'heat_source',
-      //     label: 'Heating source',
-      //     options: [
-      //       'Grid Power - Projection 2020 - 2040',
-      //       'District Heating - Projection 2020 - 2040',
-      //       'Gas - Projection 2020 - 2040',
-      //     ],
-      //   },
-      //   {
-      //     id: 'electricity_source',
-      //     label: 'Electricity source',
-      //     options: ['Grid Power - Projection 2020 - 2040'],
-      //   },
+      { id: 'electricity_usage', label: 'Electricity use (kWh/m²/yr)', type: 'number' },
+      { id: 'electricity_exported', label: 'Electricity exported to grid (kWh/m²/yr)', type: 'number' },
+      {
+        id: 'heat_source',
+        label: 'Heating source',
+        options: [
+          'Grid Power - Projection 2020 - 2040',
+          'District Heating - Projection 2020 - 2040',
+          'Gas - Projection 2020 - 2040',
+        ],
+      },
+      {
+        id: 'electricity_source',
+        label: 'Electricity source',
+        options: ['Grid Power - Projection 2020 - 2040'],
+      },
     ]
     const projectId = 'acfa456f-6628-4c0d-a0c8-1a53b1a46785'
     const { getByTestId } = render(
