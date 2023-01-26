@@ -3,10 +3,7 @@
     "browser": true,
     "es2021": true
   },
-  "ignorePatterns": [
-    "src/dataAccess/*",
-    "vite*.ts"
-  ],
+  "ignorePatterns": ["src/dataAccess/*", "vite*.ts"],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",

@@ -37,7 +37,7 @@ import {
   useGetProjectsQuery,
   useGetProjectStagesQuery,
   useGetSingleProjectQuery,
-  useUpdateProjectGroupMutation
+  useUpdateProjectGroupMutation,
 } from '@lcacollect/project'
 import { useGetAccountRolesQuery } from '../../src/dataAccess'
 
