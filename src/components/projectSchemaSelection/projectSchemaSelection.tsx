@@ -79,6 +79,7 @@ export const ProjectSchemaSelection = (props: ProjectSchemaSelectionProps) => {
       loading={schemaTemplateLoading || projectSchemaLoading}
     >
       <Autocomplete
+        data-testid='auto-complete'
         aria-label='reporting-schema-selector'
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
@@ -91,6 +92,7 @@ export const ProjectSchemaSelection = (props: ProjectSchemaSelectionProps) => {
         isOptionEqualToValue={(option, value) => option.name === value.name}
         renderInput={(params) => (
           <TextField
+            data-testid='text-field'
             {...params}
             label='Reporting Schema'
             variant='standard'
