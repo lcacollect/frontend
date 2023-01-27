@@ -1,12 +1,12 @@
 # LCA Collect
 
-LCA Collect is a web platform for collecting documentation for LCA (Life Cycle Assessment).
-LCA Collect has been developed by [Arkitema](https://arkitema.com) and [COWI](https://cowi.com) and given to the Danish
+LCAcollect is a web platform for collecting documentation for LCA (Life Cycle Assessment).
+LCAcollect has been developed by [Arkitema](https://arkitema.com) and [COWI](https://cowi.com) and given to the Danish
 Building Industry to be used widely in the industry.
 
 ## Introduction
 
-This the frontend app for the LCA Collect Tool.
+This the frontend app for the LCAcollect Tool.
 It is written in Typescript and React.
 
 ## Get started
@@ -35,13 +35,13 @@ CYPRESS_TEST_USER_PASSWORD=
 To generate GraphQL hooks
 `npm run codegen`
 
-## Development Setup with other @lca packages
+## Development Setup with other @lcacollect packages
 
-You can use `npm link` to set up live reloading of the other `@lca` packages.
+You can use `npm link` to set up live reloading of the other `@lcacollect` packages.
 
 - Clone the package that you wish to enable live reload on.
 - In the terminal, go the root folder of the cloned repo and write `npm link` in the terminal
-- Go back to this repo's root folder and write `npm link @lca/{PACKAGE}` to link the package.
+- Go back to this repo's root folder and write `npm link @lcacollect/{PACKAGE}` to link the package.
 - When you make changes to the package, that you wish to see in this app, simply run `npm run build` in the package and
   the changes will available here.
 
