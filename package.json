@@ -26,7 +26,7 @@
     "@fontsource/roboto": "^4.5.8",
     "@lcacollect/components": "^1.1.1",
     "@lcacollect/core": "^1.0.1",
-    "@lcacollect/documentation": "^1.0.4",
+    "@lcacollect/documentation": "^1.0.5",
     "@lcacollect/project": "^1.1.1",
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.0",
