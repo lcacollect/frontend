@@ -2,13 +2,9 @@ import { GetReportingSchemasDocument } from '@lcacollect/project'
 import { MockedResponse } from '@apollo/client/testing'
 import {
   AddReportingSchemaFromTemplateDocument,
-  GetSchemaTemplatesDocument,
   GetProjectSchemasDocument,
+  GetSchemaTemplatesDocument,
 } from '../dataAccess'
-import getReportingSchemasResponse from './getReportingSchemas'
-import getSchemaTemplatesResponse from './getSchemaTemplates'
-import getProjectSchemasResponse from './getProjectSchemas'
-import addReportingSchemaFromTemplateResponse from './addReportingSchemaFromTemplate'
 
 export const reportingSchemaErrorMock: MockedResponse[] = [
   {

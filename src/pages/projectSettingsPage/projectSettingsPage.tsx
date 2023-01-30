@@ -3,10 +3,13 @@ import { Grid } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import { useGetSingleProjectQuery } from '../../dataAccess'
 import { DataFetchWrapper, PaperPage, PaperPageStack } from '@lcacollect/components'
-import { BuildingImageUpload, ProjectInformation } from '@lcacollect/project'
-import { ProjectSchemaSelection } from '../../components'
-import { BuildingInformation } from '../../components/buildingInformation'
-import { BuildingEnergyInformation } from '../../components/buildingEnergyInformation'
+import {
+  BuildingImageUpload,
+  ProjectInformation,
+  ProjectSchemaSelection,
+  BuildingInformation,
+  BuildingEnergyInformation,
+} from '@lcacollect/project'
 
 export const ProjectSettingsPage = () => {
   const { projectId } = useParams()
