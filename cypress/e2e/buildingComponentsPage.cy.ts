@@ -10,7 +10,6 @@ import {
 import adminAccountData from '../fixtures/getAdminAccount'
 import projectMembersData from '../fixtures/getProjectMembers'
 import projectsData from '../fixtures/getProjects'
-import projectSourceFilesData from '../fixtures/getProjectSourceFiles'
 import projectSourcesData from '../fixtures/getProjectSources'
 import reportingSchemasData from '../fixtures/getSchemaForBuildingComponents'
 import { OPERATIONS } from '../support/operations'
@@ -29,8 +28,7 @@ describe(
     const existingNestedCategoryWithElements = reportingSchemasData.data.reportingSchemas[0].categories[2]
     const existingSources = projectSourcesData.data.projectSources
     const existingSourceWithValidInterpretation = projectSourcesData.data.projectSources[1]
-    const existingSourceFiles = projectSourceFilesData.data.projectSourceFiles
-    const existingSourceFile = projectSourceFilesData.data.projectSourceFiles[1]
+    const existingSourceFile = projectSourcesData.data.projectSources[1].data
     const newSchemaElement = {
       id: '403d48c1-f93c-4a3c-b93a-23c77e4a5df1',
       name: 'New Element Name',
@@ -113,6 +111,9 @@ describe(
         .mockGraphqlOps<OPERATIONS, 'getAccount', OPERATIONS['getAccount']>('getAccount', {
           resolver: () => adminAccountData.data,
         })
+        .mockGraphqlOps<OPERATIONS, 'getAccountRoles', OPERATIONS['getAccountRoles']>('getAccountRoles', {
+          resolver: () => adminAccountData.data,
+        })
         .mockGraphqlOps<OPERATIONS, 'getCommentsForTask', OPERATIONS['getCommentsForTask']>('getCommentsForTask', {
           resolver: ({ variables: taskId }) => ({
             comments: [],
@@ -137,10 +138,10 @@ describe(
         .mockGraphqlOps<OPERATIONS, 'getProjectSources', OPERATIONS['getProjectSources']>('getProjectSources', {
           resolver: ({ variables: { projectId } }) => ({ projectSources: existingSources }),
         })
-        .mockGraphqlOps<OPERATIONS, 'getProjectSourceFiles', OPERATIONS['getProjectSourceFiles']>(
-          'getProjectSourceFiles',
+        .mockGraphqlOps<OPERATIONS, 'getProjectSourceData', OPERATIONS['getProjectSourceData']>(
+          'getProjectSourceData',
           {
-            resolver: ({ variables: { dataIds } }) => ({ projectSourceFiles: existingSourceFiles }),
+            resolver: ({ variables: { projectId } }) => ({ projectSources: existingSources }),
           },
         )
         .mockGraphqlOps<OPERATIONS, 'getSchemaElements', OPERATIONS['getSchemaElements']>('getSchemaElements', {
@@ -232,23 +233,24 @@ describe(
         .within(() => {
           cy.get('[data-field=schemaCategory]').click()
         })
-      cy.get(`li[data-value=${existingNestedCategoryWithElements.id}]`).click()
+      cy.get(`li[data-value='bb945391-3208-4f53-85d5-6aed9d653bfa']`).click()
       cy.get('[data-id]')
         .last()
         .within(() => {
-          cy.get('[data-field=name] > div').type(newSchemaElement.name)
-          cy.get('input[type=number]').type('{selectall}{backspace}').type(newSchemaElement.quantity.toString())
+          cy.get('input[type=text]').type(newSchemaElement.name)
+          cy.get('input[type=number]').type('{selectall}{backspace}')
+            .type(newSchemaElement.quantity.toString())
           cy.get('[data-field=unit]').click()
         })
-      cy.get(`li[data-value=${newSchemaElement.unit}]`).click()
-      cy.get('textarea[rows]').type(newSchemaElement.description)
+      cy.get(`li[data-value=${newSchemaElement.unit}]`).click({force: true})
+      cy.get('textarea[rows]').type(newSchemaElement.description, {force: true})
       cy.get('[data-testid=SaveIcon]').click({ force: true })
     })
 
     it('should be possible to add multiple building component elements from a source', () => {
       expandCategories()
       cy.get('[data-testid=ControlPointDuplicateOutlinedIcon]').click()
-      cy.get(`button[value="${existingSourceWithValidInterpretation.dataId}"]`).click()
+      cy.get(`button[value="${existingSourceWithValidInterpretation.id}"]`).click()
 
       cy.contains('label', 'Category Name').click()
       cy.get(`input[value="${existingNestedCategory.name}"]`)
@@ -300,7 +302,7 @@ describe(
         cy.get('[data-testid=EditIcon]').click()
         cy.get('[data-field=schemaCategory]').click()
       })
-      cy.get(`li[data-value=${existingNestedCategoryWithElements.id}]`).click()
+      cy.get(`li[data-value='bb945391-3208-4f53-85d5-6aed9d653bfa']`).click()
       cy.get(`[data-id=${existingNestedCategoryWithElements.elements[0].id}]`).within(() => {
         cy.get('[data-field=name] > div').type('{selectall}{backspace}').type(newSchemaElement.name)
         cy.get('input[type=number]').type('{selectall}{backspace}').type(newSchemaElement.quantity.toString())
