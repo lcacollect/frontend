@@ -233,7 +233,6 @@ describe(
         .within(() => {
           cy.get('[data-field=schemaCategory]').click()
         })
-      //cy.get(`li[data-value=${existingNestedCategoryWithElements.id}]`).click()
       cy.get(`li[data-value='bb945391-3208-4f53-85d5-6aed9d653bfa']`).click()
       cy.get('[data-id]')
         .last()
@@ -303,7 +302,7 @@ describe(
         cy.get('[data-testid=EditIcon]').click()
         cy.get('[data-field=schemaCategory]').click()
       })
-      cy.get(`li[data-value=${existingNestedCategoryWithElements.id}]`).click()
+      cy.get(`li[data-value='bb945391-3208-4f53-85d5-6aed9d653bfa']`).click()
       cy.get(`[data-id=${existingNestedCategoryWithElements.elements[0].id}]`).within(() => {
         cy.get('[data-field=name] > div').type('{selectall}{backspace}').type(newSchemaElement.name)
         cy.get('input[type=number]').type('{selectall}{backspace}').type(newSchemaElement.quantity.toString())
