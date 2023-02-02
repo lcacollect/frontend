@@ -40,9 +40,9 @@ export default {
                 unit: Unit.Kg,
                 description: 'This is my wall 0',
                 schemaCategory: {
-                  id: '64b4ad8f-0d22-4004-b9a7-aa9b7553b8a5',
-                  name: '10 | Terræn',
-                  path: '/689dea13-cd9c-47e6-a8ca-21aca8331932',
+                  id: '4853d83d-54f0-4ba7-8db9-48df0673b2c4',
+                  name: '10x | Terræn',
+                  path: '/689dea13-cd9c-47e6-a8ca-21aca8331932/64b4ad8f-0d22-4004-b9a7-aa9b7553b8a5',
                 },
               },
               {
@@ -52,9 +52,9 @@ export default {
                 unit: Unit.M,
                 description: 'This is my wall 1',
                 schemaCategory: {
-                  id: '64b4ad8f-0d22-4004-b9a7-aa9b7553b8a5',
-                  name: '10 | Terræn',
-                  path: '/689dea13-cd9c-47e6-a8ca-21aca8331932',
+                  id: '4853d83d-54f0-4ba7-8db9-48df0673b2c4',
+                  name: '10x | Terræn',
+                  path: '/689dea13-cd9c-47e6-a8ca-21aca8331932/64b4ad8f-0d22-4004-b9a7-aa9b7553b8a5',
                 },
               },
               {
@@ -64,9 +64,9 @@ export default {
                 unit: Unit.M2,
                 description: 'This is my wall 2',
                 schemaCategory: {
-                  id: '64b4ad8f-0d22-4004-b9a7-aa9b7553b8a5',
-                  name: '10 | Terræn',
-                  path: '/689dea13-cd9c-47e6-a8ca-21aca8331932',
+                  id: '4853d83d-54f0-4ba7-8db9-48df0673b2c4',
+                  name: '10x | Terræn',
+                  path: '/689dea13-cd9c-47e6-a8ca-21aca8331932/64b4ad8f-0d22-4004-b9a7-aa9b7553b8a5',
                 },
               },
             ],

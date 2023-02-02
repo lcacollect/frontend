@@ -11,7 +11,7 @@ import {
   useGetProjectNameQuery,
   useGetProjectSchemasQuery,
   useGetProjectSchemasWithCategoriesQuery,
-  useGetProjectSourceFilesQuery,
+  useGetProjectSourceDataQuery,
   useGetProjectSourcesQuery,
   useGetSchemaElementsQuery,
   useGetSchemaTemplatesQuery,
@@ -54,7 +54,7 @@ export interface OPERATIONS {
   getProjectSchemasWithCategories: QueryFN<typeof useGetProjectSchemasWithCategoriesQuery>
   getProjectSchemas: QueryFN<typeof useGetProjectSchemasQuery>
   getProjectSources: QueryFN<typeof useGetProjectSourcesQuery>
-  getProjectSourceFiles: QueryFN<typeof useGetProjectSourceFilesQuery>
+  getProjectSourceData: QueryFN<typeof useGetProjectSourceDataQuery>
   getProjectStages: QueryFN<typeof useGetProjectStagesQuery>
   getSchemaElements: QueryFN<typeof useGetSchemaElementsQuery>
   getSchemaTemplates: QueryFN<typeof useGetSchemaTemplatesQuery>

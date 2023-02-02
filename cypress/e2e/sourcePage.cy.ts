@@ -1,8 +1,8 @@
 import { GraphQlProjectSource, ProjectSourceType, schema, Unit } from '../../src/dataAccess'
 import adminAccountData from '../fixtures/getAdminAccount'
 import projectsData from '../fixtures/getProjects'
-import projectSourceFilesData from '../fixtures/getProjectSourceFiles'
 import projectSourcesData from '../fixtures/getProjectSources'
+import projectMemberData from '../fixtures/getProjectMembers'
 import { OPERATIONS } from '../support/operations'
 /// <reference types="cypress" />
 
@@ -19,11 +19,17 @@ describe('Sources Page | without data', () => {
       .mockGraphqlOps<OPERATIONS, 'getProjects', OPERATIONS['getProjects']>('getProjects', {
         resolver: () => projectsData.data,
       })
+      .mockGraphqlOps<OPERATIONS, 'getSingleProject', OPERATIONS['getSingleProject']>('getSingleProject', {
+        resolver: ({ variables: projectId }) => projectsData.data,
+      })
       .mockGraphqlOps<OPERATIONS, 'getAccount', OPERATIONS['getAccount']>('getAccount', {
         resolver: () => adminAccountData.data,
       })
       .mockGraphqlOps<OPERATIONS, 'getProjectSources', OPERATIONS['getProjectSources']>('getProjectSources', {
         resolver: () => ({ projectSources: [] }),
+      })
+      .mockGraphqlOps<OPERATIONS, 'getProjectMembers', OPERATIONS['getProjectMembers']>('getProjectMembers', {
+        resolver: () => projectMemberData.data,
       })
       .mockGraphqlOps<OPERATIONS, 'addProjectSource', OPERATIONS['addProjectSource']>('addProjectSource', {
         resolver: () => ({
@@ -55,7 +61,6 @@ describe('Sources Page | without data', () => {
 
 describe('Sources Page | with data', () => {
   const existingSources = projectSourcesData.data.projectSources
-  const existingSourceFiles = projectSourceFilesData.data.projectSourceFiles
   const existingSource = existingSources[0]
   const newSource = {
     id: '3481d0bb-a0b5-49fa-bdea-27a4253cff0a',
@@ -84,15 +89,15 @@ describe('Sources Page | with data', () => {
       .mockGraphqlOps<OPERATIONS, 'getProjects', OPERATIONS['getProjects']>('getProjects', {
         resolver: () => projectsData.data,
       })
+      .mockGraphqlOps<OPERATIONS, 'getSingleProject', OPERATIONS['getSingleProject']>('getSingleProject', {
+        resolver: ({ variables: projectId }) => projectsData.data,
+      })
       .mockGraphqlOps<OPERATIONS, 'getProjectSources', OPERATIONS['getProjectSources']>('getProjectSources', {
         resolver: ({ variables: { projectId } }) => ({ projectSources: existingSources }),
       })
-      .mockGraphqlOps<OPERATIONS, 'getProjectSourceFiles', OPERATIONS['getProjectSourceFiles']>(
-        'getProjectSourceFiles',
-        {
-          resolver: ({ variables: { dataIds } }) => ({ projectSourceFiles: existingSourceFiles }),
-        },
-      )
+      .mockGraphqlOps<OPERATIONS, 'getProjectSourceData', OPERATIONS['getProjectSourceData']>('getProjectSourceData', {
+        resolver: ({ variables: { projectId } }) => ({ projectSources: existingSources }),
+      })
       .mockGraphqlOps<OPERATIONS, 'deleteProjectSource', OPERATIONS['deleteProjectSource']>('deleteProjectSource', {
         resolver: ({ variables: { id } }) => ({
           deleteProjectSource: existingSource.id,
