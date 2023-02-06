@@ -614,11 +614,7 @@ export type ProjectMemberFilters = {
 }
 
 export type ProjectMemberInput = {
-  company: Scalars['String']
-  email: Scalars['String']
-  id?: InputMaybe<Scalars['String']>
-  lastLogin?: InputMaybe<Scalars['Date']>
-  name: Scalars['String']
+  userId: Scalars['String']
 }
 
 export type ProjectSourceFilters = {
