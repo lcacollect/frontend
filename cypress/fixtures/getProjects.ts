@@ -6,6 +6,7 @@ export default {
         projectId: 'COWI 1',
         name: 'My Project',
         client: 'Arkitema',
+        metaFields: {"owner": ""}
       },
     ],
   },

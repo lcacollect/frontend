@@ -16,7 +16,7 @@ export default defineConfig({
   optimizeDeps: {
     exclude: [
       // '@lcacollect/documentation',
-      // '@lcacollect/project',
+      '@lcacollect/project',
       // '@lcacollect/core',
       // '@lcacollect/components',
       // '@lcacollect/e2e-testing',
