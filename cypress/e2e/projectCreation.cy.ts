@@ -67,6 +67,7 @@ describe('Project Creation Flow', () => {
   it('should navigate to settings page on icon button click', () => {
     cy.wait(500)
     cy.get('[data-testid=AddIcon]').click()
+    cy.wait(500)
     cy.url().should('include', 'settings')
     cy.get('[id=name]').type('My Project')
   })
