@@ -18,7 +18,7 @@ variables:
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
   isPR: $[eq(variables['Build.Reason'], 'PullRequest')]
   workingDirectory: $(System.DefaultWorkingDirectory)
-  azureSubscription: 'LCAcollect PROD Storage Account'
+  azureSubscription: ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main')}} 'LCAcollect PROD Storage Account' ${{ else }} 'LCAcollect DEV Storage Account'
 
 stages:
   - stage: Test
@@ -41,5 +41,5 @@ stages:
         parameters:
           vmImageName: $(vmImageName)
           sourceDirectory: $(workingDirectory)
-          storageAccount: $(storage-account)
+          storageAccount: ${{ if eq(variables.isMain, 'true')}} $(storage-account) ${{ else }} $(storage-account-dev)
           azureSubscription: $(azureSubscription)
