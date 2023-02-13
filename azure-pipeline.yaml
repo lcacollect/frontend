@@ -31,6 +31,7 @@ stages:
           vmImageName: $(vmImageName)
           workingDirectory: $(workingDirectory)
           runE2E: true
+          isMain: variables.isMain
 
   - stage: Publish
     displayName: Publish Bundle
