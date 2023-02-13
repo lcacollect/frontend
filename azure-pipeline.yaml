@@ -18,7 +18,8 @@ variables:
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
   isPR: $[eq(variables['Build.Reason'], 'PullRequest')]
   workingDirectory: $(System.DefaultWorkingDirectory)
-  azureSubscription: ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main')}} 'LCAcollect PROD Storage Account' ${{ else }} 'LCAcollect DEV Storage Account'
+  azureSubscription: 'LCAcollect PROD Storage Account'
+  azureSubscriptionDev: 'LCAcollect DEV Storage Account'
 
 stages:
   - stage: Test
@@ -43,3 +44,17 @@ stages:
           sourceDirectory: $(workingDirectory)
           storageAccount: ${{ if eq(variables.isMain, 'true')}} $(storage-account) ${{ else }} $(storage-account-dev)
           azureSubscription: $(azureSubscription)
+
+  - stage: PublishDev
+    displayName: Publish Bundle Dev
+    condition: and(succeeded(), and(eq(variables.isMain, 'false'), eq(variables.isPR, 'false')))
+    dependsOn: Test
+    variables:
+      - group: azureVariables
+    jobs:
+      - template: pipelines/publish-bundle.yaml@AzureTemplates
+        parameters:
+          vmImageName: $(vmImageName)
+          sourceDirectory: $(workingDirectory)
+          storageAccount: $(storage-account-dev)
+          azureSubscription: $(azureSubscriptionDev)
