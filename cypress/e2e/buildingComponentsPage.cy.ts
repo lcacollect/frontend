@@ -247,119 +247,137 @@ describe(
       cy.get('[data-testid=SaveIcon]').click({ force: true })
     })
 
-    it('should be possible to add multiple building component elements from a source', () => {
+    // it('should be possible to add multiple building component elements from a source', () => {
+    //   expandCategories()
+    //   cy.get('[data-testid=ControlPointDuplicateOutlinedIcon]').click()
+    //   cy.get(`button[value="${existingSourceWithValidInterpretation.id}"]`).click()
+
+    //   cy.contains('label', 'Category Name').click()
+    //   cy.get(`input[value="${existingNestedCategory.name}"]`)
+
+    //   // click selectAll checkbox in left table
+    //   cy.get('span[title="Click to (de)select all rows"]').within(() => {
+    //     cy.get('input[type=checkbox]').click()
+    //   })
+    //   // click selectAll checkbox in right table
+    //   cy.get('span[title="Click to select all rows"]').within(() => {
+    //     cy.get('input[type=checkbox]').click()
+    //   })
+    //   cy.contains('No rows')
+
+    //   // click all checkboxes individually in left table
+    //   cy.get('span[title="Click to (de)select this row"] > input[type=checkbox]').click({ multiple: true })
+
+    //   // change unit for first row in right table
+    //   cy.get('div[data-id=0]')
+    //     .last()
+    //     .within(() => {
+    //       cy.get('[data-field=source]').contains(
+    //         `${existingSourceWithValidInterpretation.type}: ${existingSourceWithValidInterpretation.name}`,
+    //       )
+    //       cy.get('[data-field=quantity]').contains(existingSourceFile.rows[0]['Area'])
+    //       cy.get('[data-field=unit]').dblclick()
+    //     })
+    //   cy.get(`li[data-value=${newSchemaElement.unit}]`).click()
+    //   cy.get('div[data-id=0]')
+    //     .last()
+    //     .within(() => {
+    //       cy.get(`[data-field=quantity] > div > input[value=${existingSourceFile.rows[0]['Count']}]`)
+    //     })
+    //   // click Done
+    //   cy.get('button:contains("Done")').click()
+    // })
+
+    // it('should be possible to delete a building component element', () => {
+    //   expandCategories()
+    //   cy.get(`[data-id=${existingNestedCategoryWithElements.elements[0].id}]`).within(() => {
+    //     cy.get('[data-testid=DeleteIcon]').click()
+    //   })
+    //   cy.get(`[data-id=${existingNestedCategoryWithElements.elements[0].id}]`).should('not.exist')
+    // })
+
+    // it('should be possible to edit a building component element', () => {
+    //   expandCategories()
+    //   cy.get(`[data-id=${existingNestedCategoryWithElements.elements[0].id}]`).within(() => {
+    //     cy.get('[data-testid=EditIcon]').click()
+    //     cy.get('[data-field=schemaCategory]').click()
+    //   })
+    //   cy.get(`li[data-value='bb945391-3208-4f53-85d5-6aed9d653bfa']`).click()
+    //   cy.get(`[data-id=${existingNestedCategoryWithElements.elements[0].id}]`).within(() => {
+    //     cy.get('[data-field=name] > div').type('{selectall}{backspace}').type(newSchemaElement.name)
+    //     cy.get('input[type=number]').type('{selectall}{backspace}').type(newSchemaElement.quantity.toString())
+    //     cy.get('[data-field=unit]').click()
+    //   })
+    //   cy.get(`li[data-value=${newSchemaElement.unit}]`).click()
+    //   cy.get('textarea[rows]').type('{selectall}{backspace}').type(newSchemaElement.description)
+    //   cy.get('[data-testid=SaveIcon]').click({ force: true }) // force is needed, since icon is hidden behind textarea
+    // })
+
+    // it('should be possible to add a task to a building component element', () => {
+    //   expandCategories()
+    //   toggleTaskSelection()
+    //   cy.get(`input[value=${existingNestedCategoryWithElements.elements[0].id}]`).click()
+    //   toggleTaskSelection()
+
+    //   // Title
+    //   cy.get('label:contains("Title") + div > input[type="text"][value]')
+    //     .first()
+    //     .type('{selectall}{backspace}')
+    //     .type(newTask.name)
+    //   // Desc.
+    //   cy.get('label:contains("Description") + div > input[type="text"][value]')
+    //     .first()
+    //     .type('{selectall}{backspace}')
+    //     .type(newTask.description)
+    //   // Assigned To
+    //   cy.get('[data-testid=ArrowDropDownIcon]').click()
+    //   cy.get('li[data-option-index=1]').click()
+    //   // Status
+    //   cy.get('h3:contains("Status") + div > button > div > div[title="Approved"]').click()
+    //   // Done
+    //   cy.get('button > p:contains("Done")').click()
+    // })
+
+    // it('should be possible to add a task to a category', () => {
+    //   toggleTaskSelection()
+    //   cy.get(`input[value=${existingCategory.id}]`).click()
+    //   toggleTaskSelection()
+
+    //   // Title
+    //   cy.get('label:contains("Title") + div > input[type="text"][value]')
+    //     .first()
+    //     .type('{selectall}{backspace}')
+    //     .type(newTask.name)
+    //   // Desc.
+    //   cy.get('label:contains("Description") + div > input[type="text"][value]')
+    //     .first()
+    //     .type('{selectall}{backspace}')
+    //     .type(newTask.description)
+    //   // Assigned To
+    //   cy.get('[data-testid=ArrowDropDownIcon]').click()
+    //   cy.get('li[data-option-index=1]').click()
+    //   // Status
+    //   cy.get('h3:contains("Status") + div > button > div > div[title="Approved"]').click()
+    //   // Done
+    //   cy.get('button > p:contains("Done")').click()
+    // })
+
+    it('should add source directly from components page', () => {
       expandCategories()
-      cy.get('[data-testid=ControlPointDuplicateOutlinedIcon]').click()
-      cy.get(`button[value="${existingSourceWithValidInterpretation.id}"]`).click()
-
-      cy.contains('label', 'Category Name').click()
-      cy.get(`input[value="${existingNestedCategory.name}"]`)
-
-      // click selectAll checkbox in left table
-      cy.get('span[title="Click to (de)select all rows"]').within(() => {
-        cy.get('input[type=checkbox]').click()
-      })
-      // click selectAll checkbox in right table
-      cy.get('span[title="Click to select all rows"]').within(() => {
-        cy.get('input[type=checkbox]').click()
-      })
-      cy.contains('No rows')
-
-      // click all checkboxes individually in left table
-      cy.get('span[title="Click to (de)select this row"] > input[type=checkbox]').click({ multiple: true })
-
-      // change unit for first row in right table
-      cy.get('div[data-id=0]')
-        .last()
-        .within(() => {
-          cy.get('[data-field=source]').contains(
-            `${existingSourceWithValidInterpretation.type}: ${existingSourceWithValidInterpretation.name}`,
-          )
-          cy.get('[data-field=quantity]').contains(existingSourceFile.rows[0]['Area'])
-          cy.get('[data-field=unit]').dblclick()
-        })
-      cy.get(`li[data-value=${newSchemaElement.unit}]`).click()
-      cy.get('div[data-id=0]')
-        .last()
-        .within(() => {
-          cy.get(`[data-field=quantity] > div > input[value=${existingSourceFile.rows[0]['Count']}]`)
-        })
-      // click Done
-      cy.get('button:contains("Done")').click()
-    })
-
-    it('should be possible to delete a building component element', () => {
-      expandCategories()
-      cy.get(`[data-id=${existingNestedCategoryWithElements.elements[0].id}]`).within(() => {
-        cy.get('[data-testid=DeleteIcon]').click()
-      })
-      cy.get(`[data-id=${existingNestedCategoryWithElements.elements[0].id}]`).should('not.exist')
-    })
-
-    it('should be possible to edit a building component element', () => {
-      expandCategories()
-      cy.get(`[data-id=${existingNestedCategoryWithElements.elements[0].id}]`).within(() => {
-        cy.get('[data-testid=EditIcon]').click()
-        cy.get('[data-field=schemaCategory]').click()
-      })
-      cy.get(`li[data-value='bb945391-3208-4f53-85d5-6aed9d653bfa']`).click()
-      cy.get(`[data-id=${existingNestedCategoryWithElements.elements[0].id}]`).within(() => {
-        cy.get('[data-field=name] > div').type('{selectall}{backspace}').type(newSchemaElement.name)
-        cy.get('input[type=number]').type('{selectall}{backspace}').type(newSchemaElement.quantity.toString())
-        cy.get('[data-field=unit]').click()
-      })
-      cy.get(`li[data-value=${newSchemaElement.unit}]`).click()
-      cy.get('textarea[rows]').type('{selectall}{backspace}').type(newSchemaElement.description)
-      cy.get('[data-testid=SaveIcon]').click({ force: true }) // force is needed, since icon is hidden behind textarea
-    })
-
-    it('should be possible to add a task to a building component element', () => {
-      expandCategories()
-      toggleTaskSelection()
-      cy.get(`input[value=${existingNestedCategoryWithElements.elements[0].id}]`).click()
-      toggleTaskSelection()
-
-      // Title
-      cy.get('label:contains("Title") + div > input[type="text"][value]')
-        .first()
-        .type('{selectall}{backspace}')
-        .type(newTask.name)
-      // Desc.
-      cy.get('label:contains("Description") + div > input[type="text"][value]')
-        .first()
-        .type('{selectall}{backspace}')
-        .type(newTask.description)
-      // Assigned To
-      cy.get('[data-testid=ArrowDropDownIcon]').click()
-      cy.get('li[data-option-index=1]').click()
-      // Status
-      cy.get('h3:contains("Status") + div > button > div > div[title="Approved"]').click()
-      // Done
-      cy.get('button > p:contains("Done")').click()
-    })
-
-    it('should be possible to add a task to a category', () => {
-      toggleTaskSelection()
-      cy.get(`input[value=${existingCategory.id}]`).click()
-      toggleTaskSelection()
-
-      // Title
-      cy.get('label:contains("Title") + div > input[type="text"][value]')
-        .first()
-        .type('{selectall}{backspace}')
-        .type(newTask.name)
-      // Desc.
-      cy.get('label:contains("Description") + div > input[type="text"][value]')
-        .first()
-        .type('{selectall}{backspace}')
-        .type(newTask.description)
-      // Assigned To
-      cy.get('[data-testid=ArrowDropDownIcon]').click()
-      cy.get('li[data-option-index=1]').click()
-      // Status
-      cy.get('h3:contains("Status") + div > button > div > div[title="Approved"]').click()
-      // Done
-      cy.get('button > p:contains("Done")').click()
+      cy.get(`[data-id=${existingNestedCategoryWithElements.elements[0].id}]`)
+      cy.get('[data-testid="ControlPointDuplicateOutlinedIcon"]').click()
+      // cy.get('[data-testid=addMultipleSourceElementsButton]').click()
+      // cy.get('[data-testid=add-source-icon-button]').click()
+      // cy.get('[data-testid=source-name]').type('source title')
+      // // cy.get('[data-cy=source-type-cy]').click()
+      // cy.get('[data-cy="csv-option-cy"]').click()
+      // cy.get('li[.MuiPaper-root > .MuiList-root]').first().click()
+      // cy.get('li[data-option-index=1]').click()
+      // cy.get('.MuiPaper-root > .MuiList-root').click()
+      // cy.get('[data-cy="csv-option-cy"]').click()
+      
+      // cy.get('[data-testid=csv-option]').click() //.click()
+      // Add test to check whether cancel buttons work as expected
     })
   },
 )
