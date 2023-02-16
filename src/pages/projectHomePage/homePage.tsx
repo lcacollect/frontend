@@ -20,7 +20,7 @@ export const ProjectsHomePage = () => {
       <RecentProjectsPaper />
       <ProjectsTable
         canCreateProjects={canCreateProjects}
-        createButtonToolTip={canCreateProjects ? null : 'Call Molio to get project create rights'}
+        createButtonToolTip={canCreateProjects ? undefined : 'Call Molio to get project create rights'}
       />
     </PaperPageStack>
   )
