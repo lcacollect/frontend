@@ -69,6 +69,7 @@ mutation updateProject(
 
 query getAccountRoles {
   account {
+    id
     roles
   }
 }
