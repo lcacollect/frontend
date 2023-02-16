@@ -1012,6 +1012,18 @@ export type ResolversParentTypes = {
   taskItem: TaskItem
 }
 
+export type DeferDirectiveArgs = {
+  if?: Scalars['Boolean']
+  label?: Maybe<Scalars['String']>
+}
+
+export type DeferDirectiveResolver<Result, Parent, ContextType = any, Args = DeferDirectiveArgs> = DirectiveResolverFn<
+  Result,
+  Parent,
+  ContextType,
+  Args
+>
+
 export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Date'], any> {
   name: 'Date'
 }
@@ -1646,6 +1658,10 @@ export type Resolvers<ContextType = any> = {
   Query?: QueryResolvers<ContextType>
 }
 
+export type DirectiveResolvers<ContextType = any> = {
+  defer?: DeferDirectiveResolver<any, any, ContextType>
+}
+
 export type GetProjectSchemasQueryVariables = Exact<{
   projectId: Scalars['String']
 }>
@@ -1721,7 +1737,7 @@ export type GetAccountRolesQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetAccountRolesQuery = {
   __typename?: 'Query'
-  account: { __typename?: 'GraphQLUserAccount'; roles: Array<string> }
+  account: { __typename?: 'GraphQLUserAccount'; id: string; roles: Array<string> }
 }
 
 export const GetProjectSchemasDocument = gql`
@@ -1989,6 +2005,7 @@ export type UpdateProjectMutationOptions = Apollo.BaseMutationOptions<
 export const GetAccountRolesDocument = gql`
   query getAccountRoles {
     account {
+      id
       roles
     }
   }

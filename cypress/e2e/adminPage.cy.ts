@@ -30,7 +30,7 @@ describe('Admin Page', () => {
       })
       .mockGraphqlOps<OPERATIONS, 'getAccountRoles', OPERATIONS['getAccountRoles']>('getAccountRoles', {
         resolver: () => ({
-          account: { roles: adminAccountData.data.account.roles },
+          account: { id: adminAccountData.data.account.id, roles: adminAccountData.data.account.roles },
         }),
       })
 
