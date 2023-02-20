@@ -1,10 +1,10 @@
 import { ErrorBoundary, LcaAppBar } from '@lcacollect/components'
 import { GraphiqlPage, NotFoundPage } from '@lcacollect/core'
 import { AdminPage, BuildingComponentsPage, ImportExportPage, SourcesPage, TasksPage } from '@lcacollect/documentation'
-import { MembersPage, ProjectLandingPage, ProjectsHomePage } from '@lcacollect/project'
+import { MembersPage, ProjectLandingPage } from '@lcacollect/project'
 import { Route, Routes } from 'react-router-dom'
 import { useGetAccountRolesQuery } from '../dataAccess'
-import { ProjectSettingsPage } from '../pages'
+import { ProjectSettingsPage, ProjectsHomePage } from '../pages'
 import { PageLayout } from './pageLayout'
 
 export const AppRoutes = () => {
