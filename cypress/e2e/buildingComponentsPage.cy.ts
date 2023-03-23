@@ -220,7 +220,7 @@ describe(
       cy.contains('Building Components')
       expandCategories()
       cy.get(`[data-id=${existingNestedCategoryWithElements.elements[0].id}]`).within(() => {
-        cy.contains('[data-field=name] > div', existingNestedCategoryWithElements.elements[0].name)
+        cy.contains('[data-field=name] > div', "Element Task Item 1")
       })
     })
 
