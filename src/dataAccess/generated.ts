@@ -50,6 +50,7 @@ export type FilterOptions = {
   isAnyOf?: InputMaybe<Array<Scalars['String']>>
   isEmpty?: InputMaybe<Scalars['Boolean']>
   isNotEmpty?: InputMaybe<Scalars['Boolean']>
+  jsonContains?: InputMaybe<Scalars['String']>
   startsWith?: InputMaybe<Scalars['String']>
 }
 
@@ -589,6 +590,7 @@ export enum ProjectDomain {
 
 export type ProjectFilters = {
   id?: InputMaybe<FilterOptions>
+  metaFields?: InputMaybe<FilterOptions>
   name?: InputMaybe<FilterOptions>
   projectId?: InputMaybe<FilterOptions>
 }
@@ -626,6 +628,7 @@ export type ProjectSourceFilters = {
 export enum ProjectSourceType {
   Csv = 'CSV',
   Speckle = 'SPECKLE',
+  Xlsx = 'XLSX',
 }
 
 export type ProjectStageInput = {

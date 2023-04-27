@@ -2,7 +2,7 @@
   "name": "lca-collect",
   "private": true,
   "description": "Frontend for LCAcollect",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "scripts": {
     "dev": "vite --port 4200 --host",
@@ -63,7 +63,7 @@
     "@typescript-eslint/parser": "^5.40.0",
     "@vitejs/plugin-react": "^2.1.0",
     "@vitest/ui": "^0.28.2",
-    "babel-eslint": "^10.1.0",
+    "@babel/eslint-parser": "^7.21.3",
     "copyfiles": "^2.4.1",
     "cypress": "^12.1.0",
     "cypress-vite": "^1.2.1",
