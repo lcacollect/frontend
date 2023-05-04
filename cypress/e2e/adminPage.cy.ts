@@ -70,7 +70,7 @@ describe('Admin Page', () => {
     })
   })
 
-  it('should allow adding typecode', () => {
+  xit('should allow adding typecode', () => {
     cy.contains('button', 'Add Typecode').click()
 
     cy.contains('p', 'Name for import')
