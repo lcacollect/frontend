@@ -50,6 +50,7 @@ export type FilterOptions = {
   isAnyOf?: InputMaybe<Array<Scalars['String']>>
   isEmpty?: InputMaybe<Scalars['Boolean']>
   isNotEmpty?: InputMaybe<Scalars['Boolean']>
+  jsonContains?: InputMaybe<Scalars['String']>
   startsWith?: InputMaybe<Scalars['String']>
 }
 
@@ -255,6 +256,10 @@ export type GraphQlUserAccount = {
   tenantId: Scalars['String']
 }
 
+export type LifeCycleStageInput = {
+  stageId: Scalars['String']
+}
+
 export type Mutation = {
   __typename?: 'Mutation'
   /** Add a comment to a task */
@@ -357,7 +362,7 @@ export type MutationAddProjectArgs = {
   metaFields?: InputMaybe<Scalars['JSON']>
   name: Scalars['String']
   projectId?: InputMaybe<Scalars['String']>
-  stages?: InputMaybe<Array<ProjectStageInput>>
+  stages?: InputMaybe<Array<LifeCycleStageInput>>
 }
 
 export type MutationAddProjectGroupArgs = {
@@ -421,7 +426,7 @@ export type MutationAddSchemaElementArgs = {
 
 export type MutationAddSchemaElementFromSourceArgs = {
   objectIds: Array<Scalars['String']>
-  quantities?: InputMaybe<Array<Scalars['String']>>
+  quantities?: InputMaybe<Array<Scalars['Float']>>
   schemaCategoryId: Scalars['String']
   sourceId: Scalars['String']
   units?: InputMaybe<Array<Unit>>
@@ -589,6 +594,7 @@ export enum ProjectDomain {
 
 export type ProjectFilters = {
   id?: InputMaybe<FilterOptions>
+  metaFields?: InputMaybe<FilterOptions>
   name?: InputMaybe<FilterOptions>
   projectId?: InputMaybe<FilterOptions>
 }
@@ -626,13 +632,7 @@ export type ProjectSourceFilters = {
 export enum ProjectSourceType {
   Csv = 'CSV',
   Speckle = 'SPECKLE',
-}
-
-export type ProjectStageInput = {
-  id: Scalars['String']
-  lifecyclePhase: Scalars['String']
-  name: Scalars['String']
-  stage: Scalars['String']
+  Xlsx = 'XLSX',
 }
 
 export type Query = {
@@ -930,6 +930,7 @@ export type ResolversTypes = {
   >
   GraphQLUserAccount: ResolverTypeWrapper<GraphQlUserAccount>
   JSON: ResolverTypeWrapper<Scalars['JSON']>
+  LifeCycleStageInput: LifeCycleStageInput
   Mutation: ResolverTypeWrapper<{}>
   ProjectDomain: ProjectDomain
   ProjectFilters: ProjectFilters
@@ -939,7 +940,6 @@ export type ResolversTypes = {
   ProjectMemberInput: ProjectMemberInput
   ProjectSourceFilters: ProjectSourceFilters
   ProjectSourceType: ProjectSourceType
-  ProjectStageInput: ProjectStageInput
   Query: ResolverTypeWrapper<{}>
   ReportingSchemaFilters: ReportingSchemaFilters
   SchemaCategoryFilters: SchemaCategoryFilters
@@ -994,6 +994,7 @@ export type ResolversParentTypes = {
   }
   GraphQLUserAccount: GraphQlUserAccount
   JSON: Scalars['JSON']
+  LifeCycleStageInput: LifeCycleStageInput
   Mutation: {}
   ProjectFilters: ProjectFilters
   ProjectGroupFilters: ProjectGroupFilters
@@ -1001,7 +1002,6 @@ export type ResolversParentTypes = {
   ProjectMemberFilters: ProjectMemberFilters
   ProjectMemberInput: ProjectMemberInput
   ProjectSourceFilters: ProjectSourceFilters
-  ProjectStageInput: ProjectStageInput
   Query: {}
   ReportingSchemaFilters: ReportingSchemaFilters
   SchemaCategoryFilters: SchemaCategoryFilters

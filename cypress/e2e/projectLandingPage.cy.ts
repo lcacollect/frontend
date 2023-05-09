@@ -3,6 +3,7 @@ import projectsData from '../fixtures/getProjects'
 import { OPERATIONS } from '../support/operations'
 import { schema } from '../../src/dataAccess'
 import adminAccountData from '../fixtures/getAdminAccount'
+import lifeCycleStages from '../fixtures/getLifeCycleStages'
 
 describe('Project Landing Page', () => {
   beforeEach(() => {
@@ -35,6 +36,9 @@ describe('Project Landing Page', () => {
             },
           ],
         }),
+      })
+      .mockGraphqlOps<OPERATIONS, 'getLifeCycleStages', OPERATIONS['getLifeCycleStages']>('getLifeCycleStages', {
+        resolver: () => lifeCycleStages.data,
       })
 
     cy.visit('/')
