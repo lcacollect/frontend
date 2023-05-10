@@ -30,7 +30,7 @@ jobs:
       - test
     with:
       artifact_name: 'lcacollect-app'
-      storage_account: ${{ (vars.AZURE_STORAGE_ACCOUNT && github.ref_name == 'main') || vars.AZURE_DEV_STORAGE_ACCOUNT }}
+      storage_account: ${{ (vars.PRODUCTION_STORAGE_ACCOUNT && github.ref_name == 'main') || vars.DEVELOPMENT_STORAGE_ACCOUNT }}
       container_name: ${{ vars.AZURE_CONTAINER_NAME }}
     secrets:
       azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
