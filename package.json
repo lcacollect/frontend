@@ -1,5 +1,6 @@
 {
   "name": "lca-collect",
+  "license": "Apache-2.0",
   "private": true,
   "description": "Frontend for LCAcollect",
   "version": "1.0.1",
