@@ -62,6 +62,7 @@ export interface OPERATIONS {
   getSingleTask: QueryFN<typeof useGetSingleTaskQuery>
   getTasks: QueryFN<typeof useGetTasksQuery>
   getTasksForTasksPage: QueryFN<typeof useGetTasksForTasksPageQuery>
+  getProjectEpds: QueryFN<typeof useGetProjectsQuery>
   addComment: MutationFN<typeof useAddCommentMutation>
   addProject: MutationFN<typeof useAddProjectMutation>
   addProjectMember: MutationFN<typeof useAddProjectMemberMutation>
