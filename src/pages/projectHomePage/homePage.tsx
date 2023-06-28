@@ -1,7 +1,7 @@
-import { RecentProjectsPaper, ProjectsTable } from '@lcacollect/project'
+import { ProjectsTable, RecentProjectsPaper } from '@lcacollect/project'
 import { PaperPageStack } from '@lcacollect/components'
 import { useMemo } from 'react'
-import { GraphQlEpdEdge, useAddProjectEpdsMutation, useGetAccountRolesQuery, useGetEpdsQuery } from '../../dataAccess'
+import { useAddProjectEpdsMutation, useGetAccountRolesQuery, useGetEpdsQuery } from '../../dataAccess'
 
 export const ProjectsHomePage = () => {
   const { data: accountData } = useGetAccountRolesQuery()
@@ -24,7 +24,7 @@ export const ProjectsHomePage = () => {
     await addProjectEpds({
       variables: {
         projectId,
-        epdIds: epdData.epds.edges.map((edge: GraphQlEpdEdge) => edge.node.id),
+        epdIds: epdData ? epdData.epds.edges.map((edge) => edge.node.id) : [],
       },
     })
   }
