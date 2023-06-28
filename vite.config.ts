@@ -15,6 +15,7 @@ export default defineConfig({
   },
   optimizeDeps: {
     exclude: [
+      // '@lcacollect/assembly',
       // '@lcacollect/documentation',
       // '@lcacollect/project',
       // '@lcacollect/core',
