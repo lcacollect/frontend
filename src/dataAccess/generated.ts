@@ -851,6 +851,7 @@ export enum ProjectDomain {
 
 export type ProjectEpdFilters = {
   category?: InputMaybe<FilterOptions>
+  id?: InputMaybe<FilterOptions>
   name?: InputMaybe<FilterOptions>
   owner?: InputMaybe<FilterOptions>
   projectId?: InputMaybe<FilterOptions>
