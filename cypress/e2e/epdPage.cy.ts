@@ -1,5 +1,6 @@
 import projectsData from '../fixtures/getProjects'
 import projectEpdsData from '../fixtures/getProjectEpds'
+import projectEpdData from '../fixtures/getProjectEpd'
 import { schema } from '../../src/dataAccess'
 import { OPERATIONS } from '../support/operations'
 import adminAccountData from '../fixtures/getAdminAccount'
@@ -23,7 +24,10 @@ describe('EPD Page', () => {
         resolver: ({ variables: projectId }) => projectsData.data,
       })
       .mockGraphqlOps<OPERATIONS, 'getProjectEpds', OPERATIONS['getProjectEpds']>('getProjectEpds', {
-        resolver: ({ variables: { projectId } }) => projectEpdsData.data,
+        resolver: ({ variables: { projectId, filters } }) => projectEpdsData.data,
+      })
+      .mockGraphqlOps<OPERATIONS, 'getProjectEpd', OPERATIONS['getProjectEpd']>('getProjectEpd', {
+        resolver: ({ variables: { projectId, epdId } }) => projectEpdData.data,
       })
     cy.visit(`projects/${projectsData.data.projects[0].id}/epds`)
   })
@@ -32,6 +36,12 @@ describe('EPD Page', () => {
     cy.get('[data-testid=epd-page]').should('exist')
     cy.get('[data-testid=FilterListIcon]').click()
     cy.get('[data-testid=epd-search-input]').type('affald')
-    cy.get('[data-testid=epd-list-item]').contains('Affald (forbrænding), kunststof, fjernvarme')
+    cy.get('[data-testid=epd-list-item]').contains('Affald (forbrænding), kunststof, fjernvarme').should('exist')
+  })
+
+  it('should display detailed EPD info', () => {
+    cy.get('[data-testid=epd-page]').should('exist')
+    cy.get('[data-testid=epd-list-item]').contains('Affald (forbrænding), kunststof, fjernvarme').click()
+    cy.get('[data-testid=epd-detail]').contains('Affald')
   })
 })
