@@ -3,7 +3,8 @@ import projectsData from '../fixtures/getProjects'
 import { schema } from '../../src/dataAccess'
 import { OPERATIONS } from '../support/operations'
 import adminAccountData from '../fixtures/getAdminAccount'
-import lifeCycleStages from '../fixtures/getLifeCycleStages'
+import epdsData from '../fixtures/getEpds'
+import lifeCycleStagesData from '../fixtures/getLifeCycleStages'
 
 describe('Projects Home Page', () => {
   beforeEach(() => {
@@ -21,10 +22,16 @@ describe('Projects Home Page', () => {
       .mockGraphqlOps<OPERATIONS, 'getAccount', OPERATIONS['getAccount']>('getAccount', {
         resolver: () => adminAccountData.data,
       })
-      .mockGraphqlOps<OPERATIONS, 'getLifeCycleStages', OPERATIONS['getLifeCycleStages']>('getLifeCycleStages', {
-        resolver: () => lifeCycleStages.data,
+      .mockGraphqlOps<OPERATIONS, 'getAccountRoles', OPERATIONS['getAccountRoles']>('getAccountRoles', {
+        resolver: () => adminAccountData.data,
       })
-    
+      .mockGraphqlOps<OPERATIONS, 'getEpds', OPERATIONS['getEpds']>('getEpds', {
+        resolver: () => epdsData.data,
+      })
+      .mockGraphqlOps<OPERATIONS, 'getLifeCycleStages', OPERATIONS['getLifeCycleStages']>('getLifeCycleStages', {
+        resolver: () => lifeCycleStagesData.data,
+      })
+
     cy.visit('/')
   })
 

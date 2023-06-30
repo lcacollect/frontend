@@ -73,3 +73,24 @@ query getAccountRoles {
     roles
   }
 }
+
+input EPDFilters {
+  source: FilterOptionInput
+}
+
+query getEpds($filters: EPDFilters, $count: Int) {
+  epds(filters: $filters, count: $count) {
+    edges {
+      node {
+        id
+      }
+    }
+    numEdges
+  }
+}
+
+mutation addProjectEpds($projectId: String!, $epdIds: [String!]!) {
+  addProjectEpds(projectId: $projectId, epdIds: $epdIds) {
+    id
+  }
+}

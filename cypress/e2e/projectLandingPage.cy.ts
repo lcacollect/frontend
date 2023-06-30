@@ -3,7 +3,8 @@ import projectsData from '../fixtures/getProjects'
 import { OPERATIONS } from '../support/operations'
 import { schema } from '../../src/dataAccess'
 import adminAccountData from '../fixtures/getAdminAccount'
-import lifeCycleStages from '../fixtures/getLifeCycleStages'
+import epdsData from '../fixtures/getEpds'
+import lifeCycleStagesData from '../fixtures/getLifeCycleStages'
 
 describe('Project Landing Page', () => {
   beforeEach(() => {
@@ -21,6 +22,18 @@ describe('Project Landing Page', () => {
       .mockGraphqlOps<OPERATIONS, 'getAccount', OPERATIONS['getAccount']>('getAccount', {
         resolver: () => adminAccountData.data,
       })
+      .mockGraphqlOps<OPERATIONS, 'getAccountRoles', OPERATIONS['getAccountRoles']>('getAccountRoles', {
+        resolver: () => adminAccountData.data,
+      })
+      .mockGraphqlOps<OPERATIONS, 'getEpds', OPERATIONS['getEpds']>('getEpds', {
+        resolver: () => epdsData.data,
+      })
+      .mockGraphqlOps<OPERATIONS, 'getLifeCycleStages', OPERATIONS['getLifeCycleStages']>('getLifeCycleStages', {
+        resolver: () => lifeCycleStagesData.data,
+      })
+      .mockGraphqlOps<OPERATIONS, 'getSingleProject', OPERATIONS['getSingleProject']>('getSingleProject', {
+        resolver: ({ variables: projectId }) => projectsData.data,
+      })
       .mockGraphqlOps<OPERATIONS, 'getProjectMembers', OPERATIONS['getProjectMembers']>('getProjectMembers', {
         resolver: () => ({
           projectMembers: [
@@ -36,9 +49,6 @@ describe('Project Landing Page', () => {
             },
           ],
         }),
-      })
-      .mockGraphqlOps<OPERATIONS, 'getLifeCycleStages', OPERATIONS['getLifeCycleStages']>('getLifeCycleStages', {
-        resolver: () => lifeCycleStages.data,
       })
 
     cy.visit('/')

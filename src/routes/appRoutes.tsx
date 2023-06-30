@@ -2,6 +2,7 @@ import { ErrorBoundary, LcaAppBar } from '@lcacollect/components'
 import { GraphiqlPage, NotFoundPage } from '@lcacollect/core'
 import { AdminPage, BuildingComponentsPage, ImportExportPage, SourcesPage, TasksPage } from '@lcacollect/documentation'
 import { MembersPage, ProjectLandingPage } from '@lcacollect/project'
+import { EpdPage } from '@lcacollect/assembly'
 import { Route, Routes } from 'react-router-dom'
 import { useGetAccountRolesQuery } from '../dataAccess'
 import { ProjectSettingsPage, ProjectsHomePage } from '../pages'
@@ -16,11 +17,12 @@ export const AppRoutes = () => {
       <Route path='/' element={<WrappedHomePage />} />
       <Route path='/projects'>
         <Route path=':projectId' element={<PageLayout />}>
+          <Route path='' element={<ProjectLandingPage />} />
           <Route path='settings' element={<ProjectSettingsPage />} />
           <Route path='members' element={<MembersPage />} />
           <Route path='sources' element={<SourcesPage />} />
           <Route path='components' element={<BuildingComponentsPage />} />
-          <Route path='' element={<ProjectLandingPage />} />
+          <Route path='epds' element={<EpdPage />} />
           <Route path='tasks' element={<TasksPage />} />
           <Route path='export' element={<ImportExportPage />} />
         </Route>
