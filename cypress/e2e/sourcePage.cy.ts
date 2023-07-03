@@ -4,6 +4,7 @@ import projectsData from '../fixtures/getProjects'
 import projectSourcesData from '../fixtures/getProjectSources'
 import projectMemberData from '../fixtures/getProjectMembers'
 import { OPERATIONS } from '../support/operations'
+import reportingSchemasData from '../fixtures/getSchemaForTasksPage'
 /// <reference types="cypress" />
 
 describe('Sources Page | without data', () => {
@@ -25,6 +26,9 @@ describe('Sources Page | without data', () => {
       .mockGraphqlOps<OPERATIONS, 'getAccount', OPERATIONS['getAccount']>('getAccount', {
         resolver: () => adminAccountData.data,
       })
+      .mockGraphqlOps<OPERATIONS, 'getAccountRoles', OPERATIONS['getAccountRoles']>('getAccountRoles', {
+        resolver: () => adminAccountData.data,
+      })
       .mockGraphqlOps<OPERATIONS, 'getProjectSources', OPERATIONS['getProjectSources']>('getProjectSources', {
         resolver: () => ({ projectSources: [] }),
       })
@@ -41,6 +45,14 @@ describe('Sources Page | without data', () => {
           },
         }),
       })
+      .mockGraphqlOps<OPERATIONS, 'getProjectSchemasWithCategories', OPERATIONS['getProjectSchemasWithCategories']>(
+        'getProjectSchemasWithCategories',
+        {
+          resolver: ({ variables: { projectId } }) => ({
+            reportingSchemas: reportingSchemasData.data.reportingSchemas,
+          }),
+        },
+      )
 
     cy.visit(`projects/${projectsData.data.projects[0].id}/sources`)
   })
@@ -56,15 +68,15 @@ describe('Sources Page | without data', () => {
     cy.get('[data-testid=source-type]').click().get('[data-value=CSV]').click()
     cy.get('input[type="file"]').attachFile('../fixtures/test.csv')
     cy.get('[data-testid=add-project-source-button]').click()
-    cy.get('[data-testid=alert-snackbar]').contains("File uploaded! Do you want to add elements to project?")
+    cy.get('[data-testid=alert-snackbar]').contains('File uploaded! Do you want to add elements to project?')
     cy.get('[data-testid=sourceAlertBtnYes]').click()
-    cy.get('[data-testid=elementFromSourceDialog]').contains("There is no soure! Add source first")
+    cy.get('[data-testid=elementFromSourceDialog]').contains('There is no soure! Add source first')
   })
 
   it('should be possible to download template', () => {
     cy.get('[data-testid=AddIcon]').click()
     cy.get('[data-testid=downloadTemplate]').click()
-    cy.readFile('cypress/downloads/lca_template.csv').should('contain', 'Name,Description,m,m2,m3,kg,pcs')    
+    cy.readFile('cypress/downloads/LCAcollect - Source Template.csv').should('contain', 'Id,Name,Description,Type Code,m,m2,m3,kg,pcs')
   })
 })
 
@@ -126,6 +138,9 @@ describe('Sources Page | with data', () => {
       .mockGraphqlOps<OPERATIONS, 'getAccount', OPERATIONS['getAccount']>('getAccount', {
         resolver: () => adminAccountData.data,
       })
+      .mockGraphqlOps<OPERATIONS, 'getAccountRoles', OPERATIONS['getAccountRoles']>('getAccountRoles', {
+        resolver: () => adminAccountData.data,
+      })
       .mockGraphqlOps<OPERATIONS, 'addProjectSource', OPERATIONS['addProjectSource']>('addProjectSource', {
         resolver: () => ({
           addProjectSource: {
@@ -136,6 +151,15 @@ describe('Sources Page | with data', () => {
           },
         }),
       })
+      .mockGraphqlOps<OPERATIONS, 'getProjectSchemasWithCategories', OPERATIONS['getProjectSchemasWithCategories']>(
+        'getProjectSchemasWithCategories',
+        {
+          resolver: ({ variables: { projectId } }) => ({
+            reportingSchemas: reportingSchemasData.data.reportingSchemas,
+          }),
+        },
+      )
+
     cy.visit(`projects/${projectsData.data.projects[0].id}/sources`)
   })
 
@@ -174,7 +198,7 @@ describe('Sources Page | with data', () => {
     cy.get('[data-testid=source-type]').click().get('[data-value=CSV]').click()
     cy.get('input[type="file"]').attachFile('../fixtures/test.csv')
     cy.get('[data-testid=add-project-source-button]').click()
-    cy.get('[data-testid=alert-snackbar]').contains("File uploaded! Do you want to add elements to project?")
+    cy.get('[data-testid=alert-snackbar]').contains('File uploaded! Do you want to add elements to project?')
     cy.get('[data-testid=sourceAlertBtnYes]').click()
     cy.get('[data-testid=elementFromSourceDialog]').find('[data-id]').should('have.length', 3)
   })

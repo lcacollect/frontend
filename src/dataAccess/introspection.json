@@ -678,6 +678,14 @@
             "type": { "kind": "SCALAR", "name": "String", "ofType": null },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "projectId",
+            "description": null,
+            "args": [],
+            "type": { "kind": "NON_NULL", "name": null, "ofType": { "kind": "SCALAR", "name": "ID", "ofType": null } },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -1988,6 +1996,14 @@
             "deprecationReason": null
           },
           {
+            "name": "projectId",
+            "description": null,
+            "args": [],
+            "type": { "kind": "NON_NULL", "name": null, "ofType": { "kind": "SCALAR", "name": "ID", "ofType": null } },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "publishedDate",
             "description": null,
             "args": [],
@@ -2661,11 +2677,7 @@
             "name": "id",
             "description": null,
             "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-            },
+            "type": { "kind": "NON_NULL", "name": null, "ofType": { "kind": "SCALAR", "name": "ID", "ofType": null } },
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -2725,6 +2737,22 @@
         "description": null,
         "fields": [
           {
+            "name": "assembly",
+            "description": null,
+            "args": [],
+            "type": { "kind": "OBJECT", "name": "GraphQLAssembly", "ofType": null },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "assemblyId",
+            "description": null,
+            "args": [],
+            "type": { "kind": "SCALAR", "name": "String", "ofType": null },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "commits",
             "description": null,
             "args": [],
@@ -2756,11 +2784,7 @@
             "name": "id",
             "description": null,
             "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-            },
+            "type": { "kind": "NON_NULL", "name": null, "ofType": { "kind": "SCALAR", "name": "ID", "ofType": null } },
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -4146,6 +4170,14 @@
             "description": "Add a Schema Element to a Schema Category",
             "args": [
               {
+                "name": "assemblyId",
+                "description": null,
+                "type": { "kind": "SCALAR", "name": "String", "ofType": null },
+                "defaultValue": "null",
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
                 "name": "description",
                 "description": null,
                 "type": {
@@ -4255,12 +4287,20 @@
                 "deprecationReason": null
               },
               {
-                "name": "schemaCategoryId",
+                "name": "schemaCategoryIds",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
-                  "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
+                  "ofType": {
+                    "kind": "LIST",
+                    "name": null,
+                    "ofType": {
+                      "kind": "NON_NULL",
+                      "name": null,
+                      "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
+                    }
+                  }
                 },
                 "defaultValue": null,
                 "isDeprecated": false,
@@ -5402,6 +5442,14 @@
             "name": "updateSchemaElement",
             "description": "Update a Schema Element",
             "args": [
+              {
+                "name": "assemblyId",
+                "description": null,
+                "type": { "kind": "SCALAR", "name": "String", "ofType": null },
+                "defaultValue": "null",
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
               {
                 "name": "description",
                 "description": null,
@@ -6589,6 +6637,14 @@
             "args": [
               {
                 "name": "commitId",
+                "description": null,
+                "type": { "kind": "SCALAR", "name": "String", "ofType": null },
+                "defaultValue": "null",
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "elementId",
                 "description": null,
                 "type": { "kind": "SCALAR", "name": "String", "ofType": null },
                 "defaultValue": "null",

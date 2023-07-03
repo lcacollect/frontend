@@ -226,7 +226,6 @@ describe(
 
     it('should be possible to add a building component element', () => {
       expandCategories()
-      cy.get(`[data-id=${existingNestedCategoryWithElements.elements[0].id}]`)
       cy.get('[data-testid=AddCircleOutlineOutlinedIcon]').click()
       cy.get('[data-id]')
         .last()
