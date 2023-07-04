@@ -40,7 +40,7 @@ import {
   useUpdateProjectGroupMutation,
 } from '@lcacollect/project'
 import { useAddProjectEpdsMutation, useGetAccountRolesQuery, useGetEpdsQuery } from '../../src/dataAccess'
-import { useGetProjectEpdsQuery, useGetProjectEpdQuery } from '@lcacollect/assembly'
+import { useGetProjectEpdsQuery, useGetProjectEpdQuery, useGetAssembliesQuery } from '@lcacollect/assembly'
 
 export interface OPERATIONS {
   exportReportingSchema: QueryFN<typeof useExportReportingSchemaQuery>
@@ -66,6 +66,7 @@ export interface OPERATIONS {
   getProjectEpds: QueryFN<typeof useGetProjectEpdsQuery>
   getProjectEpd: QueryFN<typeof useGetProjectEpdQuery>
   getEpds: QueryFN<typeof useGetEpdsQuery>
+  getAssemblies: QueryFN<typeof useGetAssembliesQuery>
   addComment: MutationFN<typeof useAddCommentMutation>
   addProject: MutationFN<typeof useAddProjectMutation>
   addProjectMember: MutationFN<typeof useAddProjectMemberMutation>
