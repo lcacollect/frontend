@@ -35,7 +35,7 @@ describe('EPD Page', () => {
   it('should display EPDs on EPD page', () => {
     cy.get('[data-testid=epd-page]').should('exist')
     cy.get('[data-testid=FilterListIcon]').click()
-    cy.get('[data-testid=epd-search-input]').type('affald')
+    cy.get('[data-testid=search-input]').type('affald')
     cy.get('[data-testid=epd-list-item]').contains('Affald (forbrænding), kunststof, fjernvarme').should('exist')
   })
 
