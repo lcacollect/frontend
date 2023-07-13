@@ -44,6 +44,7 @@ export default {
                   name: '10x | Terræn',
                   path: '/689dea13-cd9c-47e6-a8ca-21aca8331932/64b4ad8f-0d22-4004-b9a7-aa9b7553b8a5',
                 },
+                assembly: null
               },
               {
                 id: 'f469dfe9-7df7-4f36-99c9-eebbe6cc7ba0',
@@ -56,6 +57,7 @@ export default {
                   name: '10x | Terræn',
                   path: '/689dea13-cd9c-47e6-a8ca-21aca8331932/64b4ad8f-0d22-4004-b9a7-aa9b7553b8a5',
                 },
+                assembly: null
               },
               {
                 id: '96c47a7a-1607-4e83-9357-399df4d7f82b',
@@ -68,6 +70,7 @@ export default {
                   name: '10x | Terræn',
                   path: '/689dea13-cd9c-47e6-a8ca-21aca8331932/64b4ad8f-0d22-4004-b9a7-aa9b7553b8a5',
                 },
+                assembly: null
               },
             ],
             depth: 2,
@@ -85,6 +88,7 @@ export default {
                 quantity: 0.12,
                 unit: Unit.M3,
                 description: 'This is my wall 3',
+                assembly: null
               },
               {
                 id: 'f98c33f0-0b41-429e-b9d5-61199c5c6144',
@@ -92,6 +96,7 @@ export default {
                 quantity: 0.34,
                 unit: Unit.None,
                 description: 'This is my wall 4',
+                assembly: null
               },
               {
                 id: '562eab6b-3407-4c71-a8c6-a35d2402fc7b',
@@ -99,6 +104,7 @@ export default {
                 quantity: 0.56,
                 unit: Unit.Pcs,
                 description: 'This is my wall 5',
+                assembly: null
               },
             ],
             depth: 2,
