@@ -15,7 +15,7 @@ jobs:
   test:
     uses: lcacollect/.github/.github/workflows/test-npm.yaml@main
     with:
-      router_url: ${{ ('https://api.lcacollect.dk' && github.ref_name == 'main') || 'https://api.test.lcacollect.dk' }}
+      router_url: ${{ ('https://api.lcacollect.dk/graphql' && github.ref_name == 'main') || 'https://api.test.lcacollect.dk/graphql' }}
       artifact_name: 'lcacollect-app'
       run_e2e: true
       aad_client_id: ${{ vars.VITE_AAD_CLIENT_ID }}
