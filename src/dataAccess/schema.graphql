@@ -16,7 +16,7 @@ query getSchemaTemplates {
   schemaTemplates {
     id
     name
-    schema {
+    schemas {
       name
       id
     }
@@ -35,6 +35,7 @@ query getSingleProject($id: String!) {
     country
     metaFields
     imageUrl
+    public
   }
 }
 

@@ -25,8 +25,24 @@ export type Scalars = {
   _FieldSet: any
 }
 
-export type AssemblyLayerDeleteInput = {
-  id: Scalars['String']
+export type AssemblyAddInput = {
+  category: Scalars['String']
+  conversionFactor?: InputMaybe<Scalars['Float']>
+  description?: InputMaybe<Scalars['String']>
+  lifeTime?: InputMaybe<Scalars['Float']>
+  metaFields?: InputMaybe<Scalars['JSON']>
+  name: Scalars['String']
+  source?: InputMaybe<Scalars['String']>
+  unit: GraphQlAssemblyUnit
+}
+
+export type AssemblyFilters = {
+  category?: InputMaybe<FilterOptions>
+  description?: InputMaybe<FilterOptions>
+  id?: InputMaybe<FilterOptions>
+  lifeTime?: InputMaybe<FilterOptions>
+  name?: InputMaybe<FilterOptions>
+  source?: InputMaybe<FilterOptions>
 }
 
 export type AssemblyLayerInput = {
@@ -36,23 +52,33 @@ export type AssemblyLayerInput = {
   id?: InputMaybe<Scalars['String']>
   name?: InputMaybe<Scalars['String']>
   referenceServiceLife?: InputMaybe<Scalars['Int']>
+  transportConversionFactor?: InputMaybe<Scalars['Float']>
+  transportDistance?: InputMaybe<Scalars['Float']>
+  transportEpdId?: InputMaybe<Scalars['String']>
 }
 
 export type AssemblyLayerUpdateInput = {
   conversionFactor?: InputMaybe<Scalars['Float']>
   description?: InputMaybe<Scalars['String']>
-  epdId?: InputMaybe<Scalars['String']>
+  epdId: Scalars['String']
   id: Scalars['String']
   name?: InputMaybe<Scalars['String']>
   referenceServiceLife?: InputMaybe<Scalars['Int']>
+  transportConversionFactor?: InputMaybe<Scalars['Float']>
+  transportDistance?: InputMaybe<Scalars['Float']>
+  transportEpdId?: InputMaybe<Scalars['String']>
 }
 
-export enum AssemblyUnit {
-  Kg = 'kg',
-  M = 'm',
-  M2 = 'm2',
-  M3 = 'm3',
-  Pcs = 'pcs',
+export type AssemblyUpdateInput = {
+  category?: InputMaybe<Scalars['String']>
+  conversionFactor?: InputMaybe<Scalars['Float']>
+  description?: InputMaybe<Scalars['String']>
+  id: Scalars['String']
+  lifeTime?: InputMaybe<Scalars['Float']>
+  metaFields?: InputMaybe<Scalars['JSON']>
+  name?: InputMaybe<Scalars['String']>
+  source?: InputMaybe<Scalars['String']>
+  unit?: InputMaybe<GraphQlAssemblyUnit>
 }
 
 export enum AssigneeType {
@@ -76,6 +102,7 @@ export type CommitFilters = {
 export type EpdFilters = {
   category?: InputMaybe<FilterOptions>
   id?: InputMaybe<FilterOptions>
+  isTransport?: InputMaybe<FilterOptions>
   name?: InputMaybe<FilterOptions>
   owner?: InputMaybe<FilterOptions>
   region?: InputMaybe<FilterOptions>
@@ -86,6 +113,7 @@ export type EpdFilters = {
 
 export type EpdSort = {
   category?: InputMaybe<SortOptions>
+  isTransport?: InputMaybe<SortOptions>
   name?: InputMaybe<SortOptions>
   owner?: InputMaybe<SortOptions>
   region?: InputMaybe<SortOptions>
@@ -101,23 +129,47 @@ export type FilterOptions = {
   isAnyOf?: InputMaybe<Array<Scalars['String']>>
   isEmpty?: InputMaybe<Scalars['Boolean']>
   isNotEmpty?: InputMaybe<Scalars['Boolean']>
+  isTrue?: InputMaybe<Scalars['Boolean']>
   jsonContains?: InputMaybe<Scalars['String']>
   startsWith?: InputMaybe<Scalars['String']>
 }
 
+export type GraphQlAddEpdInput = {
+  ap?: InputMaybe<Scalars['JSON']>
+  comment?: InputMaybe<Scalars['String']>
+  conversions?: InputMaybe<Scalars['JSON']>
+  declaredUnit: GraphQlUnit
+  ep?: InputMaybe<Scalars['JSON']>
+  gwp?: InputMaybe<Scalars['JSON']>
+  id?: InputMaybe<Scalars['String']>
+  location: Scalars['String']
+  metaData?: InputMaybe<Scalars['JSON']>
+  name: Scalars['String']
+  odp?: InputMaybe<Scalars['JSON']>
+  penre?: InputMaybe<Scalars['JSON']>
+  pere?: InputMaybe<Scalars['JSON']>
+  pocp?: InputMaybe<Scalars['JSON']>
+  publishedDate: Scalars['Date']
+  referenceServiceLife?: InputMaybe<Scalars['Int']>
+  source: Scalars['JSON']
+  subtype: Scalars['String']
+  validUntil: Scalars['Date']
+  version: Scalars['String']
+}
+
 export type GraphQlAssembly = {
   __typename?: 'GraphQLAssembly'
-  category?: Maybe<Scalars['String']>
+  category: Scalars['String']
   conversionFactor: Scalars['Float']
   description?: Maybe<Scalars['String']>
   gwp: Scalars['Float']
   id: Scalars['String']
-  layers?: Maybe<Array<GraphQlAssemblyLayer>>
+  layers: Array<Maybe<GraphQlAssemblyLayer>>
   lifeTime: Scalars['Float']
   metaFields?: Maybe<Scalars['JSON']>
   name: Scalars['String']
-  projectId: Scalars['String']
-  unit?: Maybe<AssemblyUnit>
+  source: Scalars['String']
+  unit: GraphQlAssemblyUnit
 }
 
 export type GraphQlAssemblyGwpArgs = {
@@ -133,6 +185,17 @@ export type GraphQlAssemblyLayer = {
   id?: Maybe<Scalars['String']>
   name?: Maybe<Scalars['String']>
   referenceServiceLife?: Maybe<Scalars['Int']>
+  transportConversionFactor: Scalars['Float']
+  transportDistance?: Maybe<Scalars['Float']>
+  transportEpd?: Maybe<GraphQlProjectEpd>
+}
+
+export enum GraphQlAssemblyUnit {
+  Kg = 'kg',
+  M = 'm',
+  M2 = 'm2',
+  M3 = 'm3',
+  Pcs = 'pcs',
 }
 
 export type GraphQlAssignee = {
@@ -180,7 +243,9 @@ export type GraphQlepd = {
   ep?: Maybe<GraphQlImpactCategories>
   gwp?: Maybe<GraphQlImpactCategories>
   id: Scalars['String']
+  isTransport: Scalars['Boolean']
   location: Scalars['String']
+  metaFields?: Maybe<Scalars['JSON']>
   name: Scalars['String']
   odp?: Maybe<GraphQlImpactCategories>
   originId?: Maybe<Scalars['String']>
@@ -204,7 +269,9 @@ export type GraphQlepdBase = {
   ep?: Maybe<GraphQlImpactCategories>
   gwp?: Maybe<GraphQlImpactCategories>
   id: Scalars['String']
+  isTransport: Scalars['Boolean']
   location: Scalars['String']
+  metaFields?: Maybe<Scalars['JSON']>
   name: Scalars['String']
   odp?: Maybe<GraphQlImpactCategories>
   penre?: Maybe<GraphQlImpactCategories>
@@ -272,20 +339,42 @@ export type GraphQlProject = {
   metaFields?: Maybe<Scalars['JSON']>
   name: Scalars['String']
   projectId?: Maybe<Scalars['ID']>
+  public: Scalars['Boolean']
   stages?: Maybe<Array<GraphQlProjectStage>>
+}
+
+export type GraphQlProjectAssembly = {
+  __typename?: 'GraphQLProjectAssembly'
+  category: Scalars['String']
+  conversionFactor: Scalars['Float']
+  description?: Maybe<Scalars['String']>
+  gwp: Scalars['Float']
+  id: Scalars['String']
+  layers: Array<GraphQlAssemblyLayer>
+  lifeTime: Scalars['Float']
+  metaFields?: Maybe<Scalars['JSON']>
+  name: Scalars['String']
+  projectId: Scalars['String']
+  unit: GraphQlAssemblyUnit
+}
+
+export type GraphQlProjectAssemblyGwpArgs = {
+  phases?: InputMaybe<Array<Scalars['String']>>
 }
 
 export type GraphQlProjectEpd = {
   __typename?: 'GraphQLProjectEPD'
   ap?: Maybe<GraphQlImpactCategories>
-  assemblies?: Maybe<Array<GraphQlAssembly>>
+  assemblies?: Maybe<Array<GraphQlProjectAssembly>>
   comment?: Maybe<Scalars['String']>
   conversions: Array<GraphQlConversion>
   declaredUnit?: Maybe<Scalars['String']>
   ep?: Maybe<GraphQlImpactCategories>
   gwp?: Maybe<GraphQlImpactCategories>
   id: Scalars['String']
+  isTransport: Scalars['Boolean']
   location: Scalars['String']
+  metaFields?: Maybe<Scalars['JSON']>
   name: Scalars['String']
   odp?: Maybe<GraphQlImpactCategories>
   originId: Scalars['String']
@@ -383,7 +472,7 @@ export type GraphQlSchemaCategory = {
 
 export type GraphQlSchemaElement = {
   __typename?: 'GraphQLSchemaElement'
-  assembly?: Maybe<GraphQlAssembly>
+  assembly?: Maybe<GraphQlProjectAssembly>
   assemblyId?: Maybe<Scalars['String']>
   commits: Array<GraphQlCommit>
   description?: Maybe<Scalars['String']>
@@ -402,7 +491,7 @@ export type GraphQlSchemaTemplate = {
   __typename?: 'GraphQLSchemaTemplate'
   id: Scalars['String']
   name: Scalars['String']
-  schema?: Maybe<GraphQlReportingSchema>
+  schemas?: Maybe<Array<GraphQlReportingSchema>>
 }
 
 export type GraphQlSourceFile = {
@@ -441,20 +530,40 @@ export type GraphQlTask = {
   status: TaskStatus
 }
 
+export type GraphQlTypeCodeElement = {
+  __typename?: 'GraphQLTypeCodeElement'
+  code: Scalars['String']
+  id: Scalars['String']
+  level: Scalars['Int']
+  name: Scalars['String']
+  parentCode: Scalars['String']
+  parentPath: Scalars['String']
+}
+
+export type GraphQlTypeCodeElementInput = {
+  code: Scalars['String']
+  id?: InputMaybe<Scalars['String']>
+  level?: InputMaybe<Scalars['Int']>
+  name: Scalars['String']
+  parentPath: Scalars['String']
+}
+
 export enum GraphQlUnit {
+  Kg = 'KG',
   L = 'L',
   M = 'M',
   M2 = 'M2',
   M2R1 = 'M2R1',
   M3 = 'M3',
   Pcs = 'PCS',
-  Tones = 'Tones',
+  Tones = 'TONES',
+  TonesKm = 'TONES_KM',
   Unknown = 'UNKNOWN',
-  Kg = 'kg',
 }
 
 export type GraphQlUserAccount = {
   __typename?: 'GraphQLUserAccount'
+  blobSasToken: Scalars['String']
   email: Scalars['String']
   id: Scalars['String']
   name: Scalars['String']
@@ -468,12 +577,22 @@ export type LifeCycleStageInput = {
 
 export type Mutation = {
   __typename?: 'Mutation'
-  addAssembly: GraphQlAssembly
+  /** Add Assemblies */
+  addAssemblies: Array<GraphQlAssembly>
+  /** Add layers to an Assembly */
   addAssemblyLayers: Array<GraphQlAssemblyLayer>
   /** Add a comment to a task */
   addComment: GraphQlComment
+  /** Add Global EPDs. */
+  addEpds: Array<GraphQlepd>
   /** Add a Project */
   addProject: GraphQlProject
+  /** Add Project Assemblies */
+  addProjectAssemblies: Array<GraphQlProjectAssembly>
+  /** Add Project Assemblies from Assemblies */
+  addProjectAssembliesFromAssemblies: Array<GraphQlProjectAssembly>
+  /** Add layers to an Assembly */
+  addProjectAssemblyLayers: Array<GraphQlAssemblyLayer>
   /** Add Global EPDs to a project. */
   addProjectEpds: Array<GraphQlProjectEpd>
   /** Add a Project Group */
@@ -510,14 +629,26 @@ export type Mutation = {
   addTask: GraphQlTask
   /** Add a new tag. */
   createTag: GraphQlTag
-  deleteAssembly: Scalars['String']
+  /** Add a new typeCodeElement */
+  createTypeCodeElement: GraphQlTypeCodeElement
+  /** Add a new typeCodeElement from csv file */
+  createTypeCodeElementFromSource: Scalars['String']
+  /** Delete Assemblies */
+  deleteAssemblies: Array<Scalars['ID']>
+  /** Delete layers from an Assembly */
   deleteAssemblyLayers: Array<Scalars['String']>
   /** Delete a comment */
   deleteComment: Scalars['String']
+  /** Delete a global EPD */
+  deleteEpds: Array<Scalars['String']>
   /** Delete a project */
   deleteProject: Scalars['String']
+  /** Delete Project Assemblies */
+  deleteProjectAssemblies: Array<Scalars['ID']>
+  /** Delete layers from an Assembly */
+  deleteProjectAssemblyLayers: Array<Scalars['String']>
   /** Delete a project EPD */
-  deleteProjectEpd: Scalars['String']
+  deleteProjectEpds: Array<Scalars['String']>
   /** Delete a project group */
   deleteProjectGroup: Scalars['String']
   /** Delete a Project Member */
@@ -538,14 +669,20 @@ export type Mutation = {
   deleteTag: Scalars['String']
   /** Delete a Task */
   deleteTask: Scalars['String']
+  /** Delete a TypeCodeElement */
+  deleteTypeCodeElement: Scalars['String']
   /** Remove Project Members from an existing Project Group */
   removeProjectMembersFromGroup: GraphQlProjectGroup
-  updateAssembly: GraphQlAssembly
+  /** Update Assemblies */
+  updateAssemblies: Array<GraphQlAssembly>
   updateAssemblyLayers: Array<GraphQlAssemblyLayer>
   /** Update a task comment */
   updateComment: GraphQlComment
   /** Update a Project */
   updateProject: GraphQlProject
+  /** Update Project Assemblies */
+  updateProjectAssemblies: Array<GraphQlProjectAssembly>
+  updateProjectAssemblyLayers: Array<GraphQlAssemblyLayer>
   /** Update a Project Group */
   updateProjectGroup: GraphQlProjectGroup
   /** Update a Project Source */
@@ -554,35 +691,34 @@ export type Mutation = {
   updateReportingSchema: GraphQlReportingSchema
   /** Update a Schema Category */
   updateSchemaCategory: GraphQlSchemaCategory
-  /** Update a Schema Element */
-  updateSchemaElement: GraphQlSchemaElement
+  /** Update Schema Elements */
+  updateSchemaElements: Array<GraphQlSchemaElement>
   /** Update a Schema Template */
   updateSchemaTemplate: GraphQlSchemaTemplate
   /** Change the name of the tag or move it to a different commit. */
   updateTag: GraphQlTag
   /** Update a Task */
   updateTask: GraphQlTask
+  /** update typeCodeElement */
+  updateTypeCodeElement: GraphQlTypeCodeElement
 }
 
-export type MutationAddAssemblyArgs = {
-  category: Scalars['String']
-  conversionFactor?: InputMaybe<Scalars['Float']>
-  description?: InputMaybe<Scalars['String']>
-  lifeTime?: InputMaybe<Scalars['Float']>
-  metaFields?: InputMaybe<Scalars['JSON']>
-  name: Scalars['String']
-  projectId: Scalars['String']
-  unit: AssemblyUnit
+export type MutationAddAssembliesArgs = {
+  assemblies: Array<AssemblyAddInput>
 }
 
 export type MutationAddAssemblyLayersArgs = {
-  id: Scalars['String']
+  id: Scalars['ID']
   layers: Array<AssemblyLayerInput>
 }
 
 export type MutationAddCommentArgs = {
   taskId: Scalars['String']
   text: Scalars['String']
+}
+
+export type MutationAddEpdsArgs = {
+  epds: Array<GraphQlAddEpdInput>
 }
 
 export type MutationAddProjectArgs = {
@@ -597,7 +733,22 @@ export type MutationAddProjectArgs = {
   metaFields?: InputMaybe<Scalars['JSON']>
   name: Scalars['String']
   projectId?: InputMaybe<Scalars['String']>
+  public?: InputMaybe<Scalars['Boolean']>
   stages?: InputMaybe<Array<LifeCycleStageInput>>
+}
+
+export type MutationAddProjectAssembliesArgs = {
+  assemblies: Array<ProjectAssemblyAddInput>
+}
+
+export type MutationAddProjectAssembliesFromAssembliesArgs = {
+  assemblies: Array<Scalars['ID']>
+  projectId: Scalars['ID']
+}
+
+export type MutationAddProjectAssemblyLayersArgs = {
+  id: Scalars['ID']
+  layers: Array<AssemblyLayerInput>
 }
 
 export type MutationAddProjectEpdsArgs = {
@@ -675,6 +826,7 @@ export type MutationAddSchemaElementFromSourceArgs = {
 
 export type MutationAddSchemaTemplateArgs = {
   name: Scalars['String']
+  typeCodes?: InputMaybe<Array<GraphQlTypeCodeElementInput>>
 }
 
 export type MutationAddTaskArgs = {
@@ -692,25 +844,49 @@ export type MutationCreateTagArgs = {
   name: Scalars['String']
 }
 
-export type MutationDeleteAssemblyArgs = {
-  id: Scalars['String']
+export type MutationCreateTypeCodeElementArgs = {
+  code: Scalars['String']
+  level: Scalars['Int']
+  name: Scalars['String']
+  parentPath?: Scalars['String']
+}
+
+export type MutationCreateTypeCodeElementFromSourceArgs = {
+  file: Scalars['String']
+}
+
+export type MutationDeleteAssembliesArgs = {
+  ids: Array<Scalars['ID']>
 }
 
 export type MutationDeleteAssemblyLayersArgs = {
-  id: Scalars['String']
-  layers: Array<AssemblyLayerDeleteInput>
+  id: Scalars['ID']
+  layers: Array<Scalars['ID']>
 }
 
 export type MutationDeleteCommentArgs = {
   id: Scalars['String']
 }
 
+export type MutationDeleteEpdsArgs = {
+  ids: Array<Scalars['String']>
+}
+
 export type MutationDeleteProjectArgs = {
   id: Scalars['String']
 }
 
-export type MutationDeleteProjectEpdArgs = {
-  id: Scalars['String']
+export type MutationDeleteProjectAssembliesArgs = {
+  ids: Array<Scalars['ID']>
+}
+
+export type MutationDeleteProjectAssemblyLayersArgs = {
+  id: Scalars['ID']
+  layers: Array<Scalars['ID']>
+}
+
+export type MutationDeleteProjectEpdsArgs = {
+  ids: Array<Scalars['String']>
 }
 
 export type MutationDeleteProjectGroupArgs = {
@@ -754,24 +930,21 @@ export type MutationDeleteTaskArgs = {
   id: Scalars['String']
 }
 
+export type MutationDeleteTypeCodeElementArgs = {
+  id: Scalars['String']
+}
+
 export type MutationRemoveProjectMembersFromGroupArgs = {
   groupId: Scalars['String']
   memberIds: Array<Scalars['String']>
 }
 
-export type MutationUpdateAssemblyArgs = {
-  category?: InputMaybe<Scalars['String']>
-  conversionFactor?: InputMaybe<Scalars['Float']>
-  description?: InputMaybe<Scalars['String']>
-  id: Scalars['String']
-  lifeTime?: InputMaybe<Scalars['Float']>
-  metaFields?: InputMaybe<Scalars['JSON']>
-  name?: InputMaybe<Scalars['String']>
-  unit?: InputMaybe<AssemblyUnit>
+export type MutationUpdateAssembliesArgs = {
+  assemblies: Array<AssemblyUpdateInput>
 }
 
 export type MutationUpdateAssemblyLayersArgs = {
-  id: Scalars['String']
+  id: Scalars['ID']
   layers: Array<AssemblyLayerUpdateInput>
 }
 
@@ -791,6 +964,16 @@ export type MutationUpdateProjectArgs = {
   metaFields?: InputMaybe<Scalars['JSON']>
   name?: InputMaybe<Scalars['String']>
   projectId?: InputMaybe<Scalars['String']>
+  public?: InputMaybe<Scalars['Boolean']>
+}
+
+export type MutationUpdateProjectAssembliesArgs = {
+  assemblies: Array<ProjectAssemblyUpdateInput>
+}
+
+export type MutationUpdateProjectAssemblyLayersArgs = {
+  id: Scalars['ID']
+  layers: Array<AssemblyLayerUpdateInput>
 }
 
 export type MutationUpdateProjectGroupArgs = {
@@ -823,20 +1006,14 @@ export type MutationUpdateSchemaCategoryArgs = {
   path?: InputMaybe<Scalars['String']>
 }
 
-export type MutationUpdateSchemaElementArgs = {
-  assemblyId?: InputMaybe<Scalars['String']>
-  description?: InputMaybe<Scalars['String']>
-  id: Scalars['String']
-  name?: InputMaybe<Scalars['String']>
-  quantity?: InputMaybe<Scalars['Float']>
-  result?: InputMaybe<Scalars['JSON']>
-  schemaCategoryId?: InputMaybe<Scalars['String']>
-  unit?: InputMaybe<Unit>
+export type MutationUpdateSchemaElementsArgs = {
+  schemaElements: Array<SchemaElementUpdateInput>
 }
 
 export type MutationUpdateSchemaTemplateArgs = {
   id: Scalars['String']
   name?: InputMaybe<Scalars['String']>
+  typeCodes?: InputMaybe<Array<GraphQlTypeCodeElementInput>>
 }
 
 export type MutationUpdateTagArgs = {
@@ -856,12 +1033,42 @@ export type MutationUpdateTaskArgs = {
   status?: InputMaybe<TaskStatus>
 }
 
+export type MutationUpdateTypeCodeElementArgs = {
+  code?: InputMaybe<Scalars['String']>
+  id: Scalars['String']
+  level?: InputMaybe<Scalars['Int']>
+  name?: InputMaybe<Scalars['String']>
+  parentPath?: InputMaybe<Scalars['String']>
+}
+
 export type PageInfo = {
   __typename?: 'PageInfo'
   endCursor?: Maybe<Scalars['String']>
   hasNextPage: Scalars['Boolean']
   hasPreviousPage: Scalars['Boolean']
   startCursor?: Maybe<Scalars['String']>
+}
+
+export type ProjectAssemblyAddInput = {
+  category: Scalars['String']
+  conversionFactor?: InputMaybe<Scalars['Float']>
+  description?: InputMaybe<Scalars['String']>
+  lifeTime?: InputMaybe<Scalars['Float']>
+  metaFields?: InputMaybe<Scalars['JSON']>
+  name: Scalars['String']
+  projectId: Scalars['String']
+  unit: GraphQlAssemblyUnit
+}
+
+export type ProjectAssemblyUpdateInput = {
+  category?: InputMaybe<Scalars['String']>
+  conversionFactor?: InputMaybe<Scalars['Float']>
+  description?: InputMaybe<Scalars['String']>
+  id: Scalars['String']
+  lifeTime?: InputMaybe<Scalars['Float']>
+  metaFields?: InputMaybe<Scalars['JSON']>
+  name?: InputMaybe<Scalars['String']>
+  unit?: InputMaybe<GraphQlAssemblyUnit>
 }
 
 export enum ProjectDomain {
@@ -874,6 +1081,7 @@ export enum ProjectDomain {
 export type ProjectEpdFilters = {
   category?: InputMaybe<FilterOptions>
   id?: InputMaybe<FilterOptions>
+  isTransport?: InputMaybe<FilterOptions>
   name?: InputMaybe<FilterOptions>
   owner?: InputMaybe<FilterOptions>
   projectId?: InputMaybe<FilterOptions>
@@ -930,6 +1138,7 @@ export type Query = {
   __typename?: 'Query'
   /** Get current user */
   account: GraphQlUserAccount
+  /** Get assemblies */
   assemblies: Array<GraphQlAssembly>
   /** Query all comments of a task */
   comments: Array<GraphQlComment>
@@ -940,6 +1149,8 @@ export type Query = {
   exportReportingSchema: Scalars['String']
   /** Get all life cycle stages */
   lifeCycleStages: Array<GraphQlLifeCycleStage>
+  /** Get project assemblies */
+  projectAssemblies: Array<GraphQlProjectAssembly>
   projectEpds: Array<GraphQlProjectEpd>
   /** Query all Project Groups */
   projectGroups: Array<GraphQlProjectGroup>
@@ -966,10 +1177,12 @@ export type Query = {
   tags: Array<GraphQlTag>
   /** Get all tasks connected to a reporting schema */
   tasks: Array<GraphQlTask>
+  /** Get typeCodeElements */
+  typeCodeElements: Array<GraphQlTypeCodeElement>
 }
 
 export type QueryAssembliesArgs = {
-  projectId: Scalars['String']
+  filters?: InputMaybe<AssemblyFilters>
 }
 
 export type QueryCommentsArgs = {
@@ -984,7 +1197,7 @@ export type QueryCommitsArgs = {
 
 export type QueryEpdsArgs = {
   after?: InputMaybe<Scalars['String']>
-  count?: Scalars['Int']
+  count?: InputMaybe<Scalars['Int']>
   filters?: InputMaybe<EpdFilters>
   sortBy?: InputMaybe<EpdSort>
 }
@@ -992,6 +1205,11 @@ export type QueryEpdsArgs = {
 export type QueryExportReportingSchemaArgs = {
   exportFormat: ExportFormat
   reportingSchemaId: Scalars['String']
+}
+
+export type QueryProjectAssembliesArgs = {
+  filters?: InputMaybe<AssemblyFilters>
+  projectId: Scalars['String']
 }
 
 export type QueryProjectEpdsArgs = {
@@ -1055,6 +1273,12 @@ export type QueryTasksArgs = {
   reportingSchemaId: Scalars['String']
 }
 
+export type QueryTypeCodeElementsArgs = {
+  code?: InputMaybe<Scalars['String']>
+  id?: InputMaybe<Scalars['String']>
+  name?: InputMaybe<Scalars['String']>
+}
+
 export type ReportingSchemaFilters = {
   id?: InputMaybe<FilterOptions>
   name?: InputMaybe<FilterOptions>
@@ -1075,6 +1299,17 @@ export type SchemaElementFilters = {
   quantity?: InputMaybe<FilterOptions>
   subclassification?: InputMaybe<FilterOptions>
   unit?: InputMaybe<FilterOptions>
+}
+
+export type SchemaElementUpdateInput = {
+  assemblyId?: InputMaybe<Scalars['String']>
+  description?: InputMaybe<Scalars['String']>
+  id: Scalars['String']
+  name?: InputMaybe<Scalars['String']>
+  quantity?: InputMaybe<Scalars['Float']>
+  result?: InputMaybe<Scalars['JSON']>
+  schemaCategory?: InputMaybe<Scalars['String']>
+  unit?: InputMaybe<Unit>
 }
 
 export type SchemaTemplateFilters = {
@@ -1206,13 +1441,14 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  AssemblyLayerDeleteInput: AssemblyLayerDeleteInput
+  AssemblyAddInput: AssemblyAddInput
   String: ResolverTypeWrapper<Scalars['String']>
-  AssemblyLayerInput: AssemblyLayerInput
   Float: ResolverTypeWrapper<Scalars['Float']>
+  AssemblyFilters: AssemblyFilters
+  AssemblyLayerInput: AssemblyLayerInput
   Int: ResolverTypeWrapper<Scalars['Int']>
   AssemblyLayerUpdateInput: AssemblyLayerUpdateInput
-  AssemblyUnit: AssemblyUnit
+  AssemblyUpdateInput: AssemblyUpdateInput
   AssigneeType: AssigneeType
   CommentFilters: CommentFilters
   CommitFilters: CommitFilters
@@ -1222,8 +1458,10 @@ export type ResolversTypes = {
   EPDSort: EpdSort
   FilterOptions: FilterOptions
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>
+  GraphQLAddEpdInput: GraphQlAddEpdInput
   GraphQLAssembly: ResolverTypeWrapper<GraphQlAssembly>
   GraphQLAssemblyLayer: ResolverTypeWrapper<GraphQlAssemblyLayer>
+  GraphQLAssemblyUnit: GraphQlAssemblyUnit
   GraphQLAssignee: GraphQlAssignee
   GraphQLComment: ResolverTypeWrapper<GraphQlComment>
   ID: ResolverTypeWrapper<Scalars['ID']>
@@ -1236,6 +1474,7 @@ export type ResolversTypes = {
   GraphQLImpactCategories: ResolverTypeWrapper<GraphQlImpactCategories>
   GraphQLLifeCycleStage: ResolverTypeWrapper<GraphQlLifeCycleStage>
   GraphQLProject: ResolverTypeWrapper<GraphQlProject>
+  GraphQLProjectAssembly: ResolverTypeWrapper<GraphQlProjectAssembly>
   GraphQLProjectEPD: ResolverTypeWrapper<GraphQlProjectEpd>
   GraphQLProjectGroup: ResolverTypeWrapper<GraphQlProjectGroup>
   GraphQLProjectMember: ResolverTypeWrapper<GraphQlProjectMember>
@@ -1260,12 +1499,16 @@ export type ResolversTypes = {
       item: ResolversTypes['GraphQLSchemaElementGraphQLSchemaCategory']
     }
   >
+  GraphQLTypeCodeElement: ResolverTypeWrapper<GraphQlTypeCodeElement>
+  GraphQLTypeCodeElementInput: GraphQlTypeCodeElementInput
   GraphQLUnit: GraphQlUnit
   GraphQLUserAccount: ResolverTypeWrapper<GraphQlUserAccount>
   JSON: ResolverTypeWrapper<Scalars['JSON']>
   LifeCycleStageInput: LifeCycleStageInput
   Mutation: ResolverTypeWrapper<{}>
   PageInfo: ResolverTypeWrapper<PageInfo>
+  ProjectAssemblyAddInput: ProjectAssemblyAddInput
+  ProjectAssemblyUpdateInput: ProjectAssemblyUpdateInput
   ProjectDomain: ProjectDomain
   ProjectEPDFilters: ProjectEpdFilters
   ProjectFilters: ProjectFilters
@@ -1279,6 +1522,7 @@ export type ResolversTypes = {
   ReportingSchemaFilters: ReportingSchemaFilters
   SchemaCategoryFilters: SchemaCategoryFilters
   SchemaElementFilters: SchemaElementFilters
+  SchemaElementUpdateInput: SchemaElementUpdateInput
   SchemaTemplateFilters: SchemaTemplateFilters
   SortOptions: SortOptions
   TagFilters: TagFilters
@@ -1292,12 +1536,14 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  AssemblyLayerDeleteInput: AssemblyLayerDeleteInput
+  AssemblyAddInput: AssemblyAddInput
   String: Scalars['String']
-  AssemblyLayerInput: AssemblyLayerInput
   Float: Scalars['Float']
+  AssemblyFilters: AssemblyFilters
+  AssemblyLayerInput: AssemblyLayerInput
   Int: Scalars['Int']
   AssemblyLayerUpdateInput: AssemblyLayerUpdateInput
+  AssemblyUpdateInput: AssemblyUpdateInput
   CommentFilters: CommentFilters
   CommitFilters: CommitFilters
   Date: Scalars['Date']
@@ -1306,6 +1552,7 @@ export type ResolversParentTypes = {
   EPDSort: EpdSort
   FilterOptions: FilterOptions
   Boolean: Scalars['Boolean']
+  GraphQLAddEpdInput: GraphQlAddEpdInput
   GraphQLAssembly: GraphQlAssembly
   GraphQLAssemblyLayer: GraphQlAssemblyLayer
   GraphQLAssignee: GraphQlAssignee
@@ -1320,6 +1567,7 @@ export type ResolversParentTypes = {
   GraphQLImpactCategories: GraphQlImpactCategories
   GraphQLLifeCycleStage: GraphQlLifeCycleStage
   GraphQLProject: GraphQlProject
+  GraphQLProjectAssembly: GraphQlProjectAssembly
   GraphQLProjectEPD: GraphQlProjectEpd
   GraphQLProjectGroup: GraphQlProjectGroup
   GraphQLProjectMember: GraphQlProjectMember
@@ -1342,11 +1590,15 @@ export type ResolversParentTypes = {
     assignee: ResolversParentTypes['GraphQLProjectMemberGraphQLProjectGroup']
     item: ResolversParentTypes['GraphQLSchemaElementGraphQLSchemaCategory']
   }
+  GraphQLTypeCodeElement: GraphQlTypeCodeElement
+  GraphQLTypeCodeElementInput: GraphQlTypeCodeElementInput
   GraphQLUserAccount: GraphQlUserAccount
   JSON: Scalars['JSON']
   LifeCycleStageInput: LifeCycleStageInput
   Mutation: {}
   PageInfo: PageInfo
+  ProjectAssemblyAddInput: ProjectAssemblyAddInput
+  ProjectAssemblyUpdateInput: ProjectAssemblyUpdateInput
   ProjectEPDFilters: ProjectEpdFilters
   ProjectFilters: ProjectFilters
   ProjectGroupFilters: ProjectGroupFilters
@@ -1358,6 +1610,7 @@ export type ResolversParentTypes = {
   ReportingSchemaFilters: ReportingSchemaFilters
   SchemaCategoryFilters: SchemaCategoryFilters
   SchemaElementFilters: SchemaElementFilters
+  SchemaElementUpdateInput: SchemaElementUpdateInput
   SchemaTemplateFilters: SchemaTemplateFilters
   TagFilters: TagFilters
   TaskFilters: TaskFilters
@@ -1388,17 +1641,17 @@ export type GraphQlAssemblyResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['GraphQLAssembly'] = ResolversParentTypes['GraphQLAssembly'],
 > = {
-  category?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
+  category?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   conversionFactor?: Resolver<ResolversTypes['Float'], ParentType, ContextType>
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
   gwp?: Resolver<ResolversTypes['Float'], ParentType, ContextType, RequireFields<GraphQlAssemblyGwpArgs, 'phases'>>
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>
-  layers?: Resolver<Maybe<Array<ResolversTypes['GraphQLAssemblyLayer']>>, ParentType, ContextType>
+  layers?: Resolver<Array<Maybe<ResolversTypes['GraphQLAssemblyLayer']>>, ParentType, ContextType>
   lifeTime?: Resolver<ResolversTypes['Float'], ParentType, ContextType>
   metaFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>
-  projectId?: Resolver<ResolversTypes['String'], ParentType, ContextType>
-  unit?: Resolver<Maybe<ResolversTypes['AssemblyUnit']>, ParentType, ContextType>
+  source?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  unit?: Resolver<ResolversTypes['GraphQLAssemblyUnit'], ParentType, ContextType>
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
@@ -1413,6 +1666,9 @@ export type GraphQlAssemblyLayerResolvers<
   id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
   referenceServiceLife?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
+  transportConversionFactor?: Resolver<ResolversTypes['Float'], ParentType, ContextType>
+  transportDistance?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
+  transportEpd?: Resolver<Maybe<ResolversTypes['GraphQLProjectEPD']>, ParentType, ContextType>
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
@@ -1467,7 +1723,9 @@ export type GraphQlepdResolvers<
   ep?: Resolver<Maybe<ResolversTypes['GraphQLImpactCategories']>, ParentType, ContextType>
   gwp?: Resolver<Maybe<ResolversTypes['GraphQLImpactCategories']>, ParentType, ContextType>
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  isTransport?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
   location?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  metaFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   odp?: Resolver<Maybe<ResolversTypes['GraphQLImpactCategories']>, ParentType, ContextType>
   originId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -1494,7 +1752,9 @@ export type GraphQlepdBaseResolvers<
   ep?: Resolver<Maybe<ResolversTypes['GraphQLImpactCategories']>, ParentType, ContextType>
   gwp?: Resolver<Maybe<ResolversTypes['GraphQLImpactCategories']>, ParentType, ContextType>
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  isTransport?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
   location?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  metaFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   odp?: Resolver<Maybe<ResolversTypes['GraphQLImpactCategories']>, ParentType, ContextType>
   penre?: Resolver<Maybe<ResolversTypes['GraphQLImpactCategories']>, ParentType, ContextType>
@@ -1577,7 +1837,31 @@ export type GraphQlProjectResolvers<
   metaFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   projectId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>
+  public?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
   stages?: Resolver<Maybe<Array<ResolversTypes['GraphQLProjectStage']>>, ParentType, ContextType>
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}
+
+export type GraphQlProjectAssemblyResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['GraphQLProjectAssembly'] = ResolversParentTypes['GraphQLProjectAssembly'],
+> = {
+  category?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  conversionFactor?: Resolver<ResolversTypes['Float'], ParentType, ContextType>
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
+  gwp?: Resolver<
+    ResolversTypes['Float'],
+    ParentType,
+    ContextType,
+    RequireFields<GraphQlProjectAssemblyGwpArgs, 'phases'>
+  >
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  layers?: Resolver<Array<ResolversTypes['GraphQLAssemblyLayer']>, ParentType, ContextType>
+  lifeTime?: Resolver<ResolversTypes['Float'], ParentType, ContextType>
+  metaFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  projectId?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  unit?: Resolver<ResolversTypes['GraphQLAssemblyUnit'], ParentType, ContextType>
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
@@ -1586,14 +1870,16 @@ export type GraphQlProjectEpdResolvers<
   ParentType extends ResolversParentTypes['GraphQLProjectEPD'] = ResolversParentTypes['GraphQLProjectEPD'],
 > = {
   ap?: Resolver<Maybe<ResolversTypes['GraphQLImpactCategories']>, ParentType, ContextType>
-  assemblies?: Resolver<Maybe<Array<ResolversTypes['GraphQLAssembly']>>, ParentType, ContextType>
+  assemblies?: Resolver<Maybe<Array<ResolversTypes['GraphQLProjectAssembly']>>, ParentType, ContextType>
   comment?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
   conversions?: Resolver<Array<ResolversTypes['GraphQLConversion']>, ParentType, ContextType>
   declaredUnit?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
   ep?: Resolver<Maybe<ResolversTypes['GraphQLImpactCategories']>, ParentType, ContextType>
   gwp?: Resolver<Maybe<ResolversTypes['GraphQLImpactCategories']>, ParentType, ContextType>
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  isTransport?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
   location?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  metaFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   odp?: Resolver<Maybe<ResolversTypes['GraphQLImpactCategories']>, ParentType, ContextType>
   originId?: Resolver<ResolversTypes['String'], ParentType, ContextType>
@@ -1720,7 +2006,7 @@ export type GraphQlSchemaElementResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['GraphQLSchemaElement'] = ResolversParentTypes['GraphQLSchemaElement'],
 > = {
-  assembly?: Resolver<Maybe<ResolversTypes['GraphQLAssembly']>, ParentType, ContextType>
+  assembly?: Resolver<Maybe<ResolversTypes['GraphQLProjectAssembly']>, ParentType, ContextType>
   assemblyId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
   commits?: Resolver<Array<ResolversTypes['GraphQLCommit']>, ParentType, ContextType>
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -1747,7 +2033,7 @@ export type GraphQlSchemaTemplateResolvers<
 > = {
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>
-  schema?: Resolver<Maybe<ResolversTypes['GraphQLReportingSchema']>, ParentType, ContextType>
+  schemas?: Resolver<Maybe<Array<ResolversTypes['GraphQLReportingSchema']>>, ParentType, ContextType>
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
@@ -1796,10 +2082,24 @@ export type GraphQlTaskResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
+export type GraphQlTypeCodeElementResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['GraphQLTypeCodeElement'] = ResolversParentTypes['GraphQLTypeCodeElement'],
+> = {
+  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  level?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  parentCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  parentPath?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}
+
 export type GraphQlUserAccountResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['GraphQLUserAccount'] = ResolversParentTypes['GraphQLUserAccount'],
 > = {
+  blobSasToken?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>
@@ -1816,14 +2116,11 @@ export type MutationResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation'],
 > = {
-  addAssembly?: Resolver<
-    ResolversTypes['GraphQLAssembly'],
+  addAssemblies?: Resolver<
+    Array<ResolversTypes['GraphQLAssembly']>,
     ParentType,
     ContextType,
-    RequireFields<
-      MutationAddAssemblyArgs,
-      'category' | 'conversionFactor' | 'lifeTime' | 'metaFields' | 'name' | 'projectId' | 'unit'
-    >
+    RequireFields<MutationAddAssembliesArgs, 'assemblies'>
   >
   addAssemblyLayers?: Resolver<
     Array<ResolversTypes['GraphQLAssemblyLayer']>,
@@ -1836,6 +2133,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<MutationAddCommentArgs, 'taskId' | 'text'>
+  >
+  addEpds?: Resolver<
+    Array<ResolversTypes['GraphQLEPD']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationAddEpdsArgs, 'epds'>
   >
   addProject?: Resolver<
     ResolversTypes['GraphQLProject'],
@@ -1854,8 +2157,27 @@ export type MutationResolvers<
       | 'metaFields'
       | 'name'
       | 'projectId'
+      | 'public'
       | 'stages'
     >
+  >
+  addProjectAssemblies?: Resolver<
+    Array<ResolversTypes['GraphQLProjectAssembly']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationAddProjectAssembliesArgs, 'assemblies'>
+  >
+  addProjectAssembliesFromAssemblies?: Resolver<
+    Array<ResolversTypes['GraphQLProjectAssembly']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationAddProjectAssembliesFromAssembliesArgs, 'assemblies' | 'projectId'>
+  >
+  addProjectAssemblyLayers?: Resolver<
+    Array<ResolversTypes['GraphQLAssemblyLayer']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationAddProjectAssemblyLayersArgs, 'id' | 'layers'>
   >
   addProjectEpds?: Resolver<
     Array<ResolversTypes['GraphQLProjectEPD']>,
@@ -1933,7 +2255,7 @@ export type MutationResolvers<
     ResolversTypes['GraphQLSchemaTemplate'],
     ParentType,
     ContextType,
-    RequireFields<MutationAddSchemaTemplateArgs, 'name'>
+    RequireFields<MutationAddSchemaTemplateArgs, 'name' | 'typeCodes'>
   >
   addTask?: Resolver<
     ResolversTypes['GraphQLTask'],
@@ -1950,11 +2272,23 @@ export type MutationResolvers<
     ContextType,
     RequireFields<MutationCreateTagArgs, 'commitId' | 'name'>
   >
-  deleteAssembly?: Resolver<
+  createTypeCodeElement?: Resolver<
+    ResolversTypes['GraphQLTypeCodeElement'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationCreateTypeCodeElementArgs, 'code' | 'level' | 'name' | 'parentPath'>
+  >
+  createTypeCodeElementFromSource?: Resolver<
     ResolversTypes['String'],
     ParentType,
     ContextType,
-    RequireFields<MutationDeleteAssemblyArgs, 'id'>
+    RequireFields<MutationCreateTypeCodeElementFromSourceArgs, 'file'>
+  >
+  deleteAssemblies?: Resolver<
+    Array<ResolversTypes['ID']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationDeleteAssembliesArgs, 'ids'>
   >
   deleteAssemblyLayers?: Resolver<
     Array<ResolversTypes['String']>,
@@ -1968,17 +2302,35 @@ export type MutationResolvers<
     ContextType,
     RequireFields<MutationDeleteCommentArgs, 'id'>
   >
+  deleteEpds?: Resolver<
+    Array<ResolversTypes['String']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationDeleteEpdsArgs, 'ids'>
+  >
   deleteProject?: Resolver<
     ResolversTypes['String'],
     ParentType,
     ContextType,
     RequireFields<MutationDeleteProjectArgs, 'id'>
   >
-  deleteProjectEpd?: Resolver<
-    ResolversTypes['String'],
+  deleteProjectAssemblies?: Resolver<
+    Array<ResolversTypes['ID']>,
     ParentType,
     ContextType,
-    RequireFields<MutationDeleteProjectEpdArgs, 'id'>
+    RequireFields<MutationDeleteProjectAssembliesArgs, 'ids'>
+  >
+  deleteProjectAssemblyLayers?: Resolver<
+    Array<ResolversTypes['String']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationDeleteProjectAssemblyLayersArgs, 'id' | 'layers'>
+  >
+  deleteProjectEpds?: Resolver<
+    Array<ResolversTypes['String']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationDeleteProjectEpdsArgs, 'ids'>
   >
   deleteProjectGroup?: Resolver<
     ResolversTypes['String'],
@@ -2030,20 +2382,23 @@ export type MutationResolvers<
   >
   deleteTag?: Resolver<ResolversTypes['String'], ParentType, ContextType, RequireFields<MutationDeleteTagArgs, 'id'>>
   deleteTask?: Resolver<ResolversTypes['String'], ParentType, ContextType, RequireFields<MutationDeleteTaskArgs, 'id'>>
+  deleteTypeCodeElement?: Resolver<
+    ResolversTypes['String'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationDeleteTypeCodeElementArgs, 'id'>
+  >
   removeProjectMembersFromGroup?: Resolver<
     ResolversTypes['GraphQLProjectGroup'],
     ParentType,
     ContextType,
     RequireFields<MutationRemoveProjectMembersFromGroupArgs, 'groupId' | 'memberIds'>
   >
-  updateAssembly?: Resolver<
-    ResolversTypes['GraphQLAssembly'],
+  updateAssemblies?: Resolver<
+    Array<ResolversTypes['GraphQLAssembly']>,
     ParentType,
     ContextType,
-    RequireFields<
-      MutationUpdateAssemblyArgs,
-      'category' | 'conversionFactor' | 'description' | 'id' | 'lifeTime' | 'metaFields' | 'name' | 'unit'
-    >
+    RequireFields<MutationUpdateAssembliesArgs, 'assemblies'>
   >
   updateAssemblyLayers?: Resolver<
     Array<ResolversTypes['GraphQLAssemblyLayer']>,
@@ -2063,8 +2418,30 @@ export type MutationResolvers<
     ContextType,
     RequireFields<
       MutationUpdateProjectArgs,
-      'address' | 'city' | 'client' | 'country' | 'domain' | 'file' | 'id' | 'metaFields' | 'name' | 'projectId'
+      | 'address'
+      | 'city'
+      | 'client'
+      | 'country'
+      | 'domain'
+      | 'file'
+      | 'id'
+      | 'metaFields'
+      | 'name'
+      | 'projectId'
+      | 'public'
     >
+  >
+  updateProjectAssemblies?: Resolver<
+    Array<ResolversTypes['GraphQLProjectAssembly']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationUpdateProjectAssembliesArgs, 'assemblies'>
+  >
+  updateProjectAssemblyLayers?: Resolver<
+    Array<ResolversTypes['GraphQLAssemblyLayer']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationUpdateProjectAssemblyLayersArgs, 'id' | 'layers'>
   >
   updateProjectGroup?: Resolver<
     ResolversTypes['GraphQLProjectGroup'],
@@ -2093,20 +2470,17 @@ export type MutationResolvers<
     ContextType,
     RequireFields<MutationUpdateSchemaCategoryArgs, 'description' | 'id' | 'name' | 'path'>
   >
-  updateSchemaElement?: Resolver<
-    ResolversTypes['GraphQLSchemaElement'],
+  updateSchemaElements?: Resolver<
+    Array<ResolversTypes['GraphQLSchemaElement']>,
     ParentType,
     ContextType,
-    RequireFields<
-      MutationUpdateSchemaElementArgs,
-      'assemblyId' | 'description' | 'id' | 'name' | 'quantity' | 'result' | 'schemaCategoryId' | 'unit'
-    >
+    RequireFields<MutationUpdateSchemaElementsArgs, 'schemaElements'>
   >
   updateSchemaTemplate?: Resolver<
     ResolversTypes['GraphQLSchemaTemplate'],
     ParentType,
     ContextType,
-    RequireFields<MutationUpdateSchemaTemplateArgs, 'id' | 'name'>
+    RequireFields<MutationUpdateSchemaTemplateArgs, 'id' | 'name' | 'typeCodes'>
   >
   updateTag?: Resolver<
     ResolversTypes['GraphQLTag'],
@@ -2122,6 +2496,12 @@ export type MutationResolvers<
       MutationUpdateTaskArgs,
       'assignedGroupId' | 'assignee' | 'description' | 'dueDate' | 'id' | 'item' | 'name' | 'status'
     >
+  >
+  updateTypeCodeElement?: Resolver<
+    ResolversTypes['GraphQLTypeCodeElement'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationUpdateTypeCodeElementArgs, 'code' | 'id' | 'level' | 'name' | 'parentPath'>
   >
 }
 
@@ -2145,7 +2525,7 @@ export type QueryResolvers<
     Array<ResolversTypes['GraphQLAssembly']>,
     ParentType,
     ContextType,
-    RequireFields<QueryAssembliesArgs, 'projectId'>
+    RequireFields<QueryAssembliesArgs, 'filters'>
   >
   comments?: Resolver<
     Array<ResolversTypes['GraphQLComment']>,
@@ -2172,6 +2552,12 @@ export type QueryResolvers<
     RequireFields<QueryExportReportingSchemaArgs, 'exportFormat' | 'reportingSchemaId'>
   >
   lifeCycleStages?: Resolver<Array<ResolversTypes['GraphQLLifeCycleStage']>, ParentType, ContextType>
+  projectAssemblies?: Resolver<
+    Array<ResolversTypes['GraphQLProjectAssembly']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryProjectAssembliesArgs, 'filters' | 'projectId'>
+  >
   projectEpds?: Resolver<
     Array<ResolversTypes['GraphQLProjectEPD']>,
     ParentType,
@@ -2244,6 +2630,12 @@ export type QueryResolvers<
     ContextType,
     RequireFields<QueryTasksArgs, 'commitId' | 'filters' | 'reportingSchemaId'>
   >
+  typeCodeElements?: Resolver<
+    Array<ResolversTypes['GraphQLTypeCodeElement']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryTypeCodeElementsArgs, 'code' | 'id' | 'name'>
+  >
 }
 
 export type Resolvers<ContextType = any> = {
@@ -2261,6 +2653,7 @@ export type Resolvers<ContextType = any> = {
   GraphQLImpactCategories?: GraphQlImpactCategoriesResolvers<ContextType>
   GraphQLLifeCycleStage?: GraphQlLifeCycleStageResolvers<ContextType>
   GraphQLProject?: GraphQlProjectResolvers<ContextType>
+  GraphQLProjectAssembly?: GraphQlProjectAssemblyResolvers<ContextType>
   GraphQLProjectEPD?: GraphQlProjectEpdResolvers<ContextType>
   GraphQLProjectGroup?: GraphQlProjectGroupResolvers<ContextType>
   GraphQLProjectMember?: GraphQlProjectMemberResolvers<ContextType>
@@ -2276,6 +2669,7 @@ export type Resolvers<ContextType = any> = {
   GraphQLSourceFile?: GraphQlSourceFileResolvers<ContextType>
   GraphQLTag?: GraphQlTagResolvers<ContextType>
   GraphQLTask?: GraphQlTaskResolvers<ContextType>
+  GraphQLTypeCodeElement?: GraphQlTypeCodeElementResolvers<ContextType>
   GraphQLUserAccount?: GraphQlUserAccountResolvers<ContextType>
   JSON?: GraphQLScalarType
   Mutation?: MutationResolvers<ContextType>
@@ -2315,7 +2709,7 @@ export type GetSchemaTemplatesQuery = {
     __typename?: 'GraphQLSchemaTemplate'
     id: string
     name: string
-    schema?: { __typename?: 'GraphQLReportingSchema'; name: string; id: string } | null
+    schemas?: Array<{ __typename?: 'GraphQLReportingSchema'; name: string; id: string }> | null
   }>
 }
 
@@ -2337,6 +2731,7 @@ export type GetSingleProjectQuery = {
     country?: string | null
     metaFields?: any | null
     imageUrl?: string | null
+    public: boolean
   }>
 }
 
@@ -2489,7 +2884,7 @@ export const GetSchemaTemplatesDocument = gql`
     schemaTemplates {
       id
       name
-      schema {
+      schemas {
         name
         id
       }
@@ -2546,6 +2941,7 @@ export const GetSingleProjectDocument = gql`
       country
       metaFields
       imageUrl
+      public
     }
   }
 `
