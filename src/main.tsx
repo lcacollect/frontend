@@ -1,12 +1,13 @@
 import { PublicClientApplication } from '@azure/msal-browser'
 import { MsalProvider } from '@azure/msal-react'
 import { ApolloTokenProvider, ErrorBoundary } from '@lcacollect/components'
-import { msalConfig } from '@lcacollect/core'
+import { msalConfig, SettingsContextProvider } from '@lcacollect/core'
 import { LicenseInfo } from '@mui/x-license-pro'
 import { StrictMode } from 'react'
 import * as ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './app/app'
+import { Settings } from './config'
 
 LicenseInfo.setLicenseKey(import.meta.env.VITE_MUI_LICENSE || '') // eslint-disable no-eval
 const msalInstance = new PublicClientApplication(
@@ -22,7 +23,9 @@ root.render(
             apolloRouterUrl={import.meta.env.VITE_APOLLO_ROUTER_URL}
             aadAppClientId={import.meta.env.VITE_AAD_APP_CLIENT_ID}
           >
-            <App />
+            <SettingsContextProvider settings={Settings}>
+              <App />
+            </SettingsContextProvider>
           </ApolloTokenProvider>
         </MsalProvider>
       </BrowserRouter>

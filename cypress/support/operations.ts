@@ -39,7 +39,8 @@ import {
   useGetSingleProjectQuery,
   useUpdateProjectGroupMutation,
 } from '@lcacollect/project'
-import { useGetAccountRolesQuery } from '../../src/dataAccess'
+import { useAddProjectEpdsMutation, useGetAccountRolesQuery, useGetEpdsQuery } from '../../src/dataAccess'
+import { useGetProjectEpdsQuery, useGetProjectEpdQuery, useGetAssembliesQuery } from '@lcacollect/assembly'
 
 export interface OPERATIONS {
   exportReportingSchema: QueryFN<typeof useExportReportingSchemaQuery>
@@ -62,6 +63,10 @@ export interface OPERATIONS {
   getSingleTask: QueryFN<typeof useGetSingleTaskQuery>
   getTasks: QueryFN<typeof useGetTasksQuery>
   getTasksForTasksPage: QueryFN<typeof useGetTasksForTasksPageQuery>
+  getProjectEpds: QueryFN<typeof useGetProjectEpdsQuery>
+  getProjectEpd: QueryFN<typeof useGetProjectEpdQuery>
+  getEpds: QueryFN<typeof useGetEpdsQuery>
+  getAssemblies: QueryFN<typeof useGetAssembliesQuery>
   addComment: MutationFN<typeof useAddCommentMutation>
   addProject: MutationFN<typeof useAddProjectMutation>
   addProjectMember: MutationFN<typeof useAddProjectMemberMutation>
@@ -71,6 +76,7 @@ export interface OPERATIONS {
   addSchemaElement: MutationFN<typeof useAddSchemaElementMutation>
   addSchemaElementFromSource: MutationFN<typeof useAddSchemaElementFromSourceMutation>
   addTask: MutationFN<typeof useAddTaskMutation>
+  addProjectEpds: MutationFN<typeof useAddProjectEpdsMutation>
   deleteProjectGroup: MutationFN<typeof useDeleteProjectGroupMutation>
   deleteProjectMember: MutationFN<typeof useDeleteProjectMemberMutation>
   deleteProjectSource: MutationFN<typeof useDeleteProjectSourceMutation>

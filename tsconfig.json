@@ -19,6 +19,6 @@
     "jsx": "react-jsx"
   },
   "include": ["src"],
-  "exclude": ["node_modules", "**/*.spec.tsx", "**/__mocks__/*.*"],
+  "exclude": ["node_modules", "**/*.spec.tsx", "**/__mocks__/*.*", "**/vite*.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

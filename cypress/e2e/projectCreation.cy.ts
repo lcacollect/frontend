@@ -1,8 +1,12 @@
 /// <reference types="cypress" />
-import lifeCycleStagesData from "../fixtures/getLifeCycleStages";
-import adminAccountData from "../fixtures/getAdminAccount";
-import { OPERATIONS } from "../support/operations";
-import { schema } from "../../src/dataAccess";
+import lifeCycleStagesData from '../fixtures/getLifeCycleStages'
+import adminAccountData from '../fixtures/getAdminAccount'
+import { OPERATIONS } from '../support/operations'
+import { schema } from '../../src/dataAccess'
+import schemaTemplatesData from '../fixtures/getSchemaTemplates'
+import projectSchemasData from '../fixtures/getProjectSchemas'
+import epdsData from '../fixtures/getEpds'
+import projectEpdsData from '../fixtures/getProjectEpds'
 
 describe('Project Creation Flow', () => {
   beforeEach(() => {
@@ -21,18 +25,34 @@ describe('Project Creation Flow', () => {
       .mockGraphqlOps<OPERATIONS, 'getAccountRoles', OPERATIONS['getAccountRoles']>('getAccountRoles', {
         resolver: () => adminAccountData.data,
       })
+      .mockGraphqlOps<OPERATIONS, 'getSchemaTemplates', OPERATIONS['getSchemaTemplates']>('getSchemaTemplates', {
+        resolver: () => schemaTemplatesData.data,
+      })
+      .mockGraphqlOps<OPERATIONS, 'getProjectSchemas', OPERATIONS['getProjectSchemas']>('getProjectSchemas', {
+        resolver: ({ variables: { projectId } }) => ({
+          reportingSchemas: projectSchemasData.data.reportingSchemas,
+        }),
+      })
+      .mockGraphqlOps<OPERATIONS, 'getEpds', OPERATIONS['getEpds']>('getEpds', {
+        resolver: () => epdsData.data,
+      })
       .mockGraphqlOps<OPERATIONS, 'addProject', OPERATIONS['addProject']>('addProject', {
         resolver: ({
-          variables: {
-            name,
-            members: [{ userId }]
-          },
-        }) => ({
+                     variables: {
+                       name,
+                       members: [{ userId }],
+                     },
+                   }) => ({
           addProject: {
             name,
             id: projectId,
             metaFields: { owner: userId },
           },
+        }),
+      })
+      .mockGraphqlOps<OPERATIONS, 'addProjectEpds', OPERATIONS['addProjectEpds']>('addProjectEpds', {
+        resolver: ({ variables: { projectId, epdIds } }) => ({
+          addProjectEpds: projectEpdsData.data.projectEpds
         }),
       })
       .mockGraphqlOps<OPERATIONS, 'getSingleProject', OPERATIONS['getSingleProject']>('getSingleProject', {

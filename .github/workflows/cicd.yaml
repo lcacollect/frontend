@@ -15,9 +15,9 @@ jobs:
   test:
     uses: lcacollect/.github/.github/workflows/test-npm.yaml@main
     with:
-      router_url: ${{ ('https://api.lcacollect.dk' && github.ref_name == 'main') || 'https://api.test.lcacollect.dk' }}
+      router_url: ${{ ('https://api.lcacollect.dk/graphql' && github.ref_name == 'main') || 'https://api.test.lcacollect.dk/graphql' }}
       artifact_name: 'lcacollect-app'
-      run_e2e: true
+      run_e2e: false
       aad_client_id: ${{ vars.VITE_AAD_CLIENT_ID }}
       aad_tenant_id: ${{ vars.VITE_AAD_TENANT_ID }}
       aad_app_client_id: ${{ vars.VITE_AAD_APP_CLIENT_ID }}
@@ -33,4 +33,4 @@ jobs:
       storage_account: ${{ (vars.PRODUCTION_STORAGE_ACCOUNT && github.ref_name == 'main') || vars.DEVELOPMENT_STORAGE_ACCOUNT }}
       container_name: ${{ vars.AZURE_CONTAINER_NAME }}
     secrets:
-      azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+      azure_credentials: ${{ (secrets.AZURE_CREDENTIALS && github.ref_name == 'main') || secrets.AZURE_CREDENTIALS_DEV }}

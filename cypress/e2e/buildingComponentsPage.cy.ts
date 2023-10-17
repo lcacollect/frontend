@@ -10,6 +10,7 @@ import {
 import adminAccountData from '../fixtures/getAdminAccount'
 import projectMembersData from '../fixtures/getProjectMembers'
 import projectsData from '../fixtures/getProjects'
+import assemblyData from '../fixtures/getAssemblies'
 import projectSourcesData from '../fixtures/getProjectSources'
 import reportingSchemasData from '../fixtures/getSchemaForBuildingComponents'
 import { OPERATIONS } from '../support/operations'
@@ -138,6 +139,9 @@ describe(
         .mockGraphqlOps<OPERATIONS, 'getProjectSources', OPERATIONS['getProjectSources']>('getProjectSources', {
           resolver: ({ variables: { projectId } }) => ({ projectSources: existingSources }),
         })
+        .mockGraphqlOps<OPERATIONS, 'getAssemblies', OPERATIONS['getAssemblies']>('getAssemblies', {
+          resolver: ({ variables: { projectId } }) => assemblyData.data,
+        })
         .mockGraphqlOps<OPERATIONS, 'getProjectSourceData', OPERATIONS['getProjectSourceData']>(
           'getProjectSourceData',
           {
@@ -220,13 +224,12 @@ describe(
       cy.contains('Building Components')
       expandCategories()
       cy.get(`[data-id=${existingNestedCategoryWithElements.elements[0].id}]`).within(() => {
-        cy.contains('[data-field=name] > div', "Element Task Item 1")
+        cy.contains('[data-field=name] > div', 'Element Task Item 1')
       })
     })
 
     it('should be possible to add a building component element', () => {
       expandCategories()
-      cy.get(`[data-id=${existingNestedCategoryWithElements.elements[0].id}]`)
       cy.get('[data-testid=AddCircleOutlineOutlinedIcon]').click()
       cy.get('[data-id]')
         .last()
@@ -242,8 +245,14 @@ describe(
             .type(newSchemaElement.quantity.toString())
           cy.get('[data-field=unit]').click()
         })
-      cy.get(`li[data-value=${newSchemaElement.unit}]`).click({force: true})
-      cy.get('textarea[rows]').type(newSchemaElement.description, {force: true})
+      cy.get(`li[data-value=${newSchemaElement.unit}]`).click({ force: true })
+      cy.get('textarea[rows]').type(newSchemaElement.description, { force: true })
+      cy.get('[data-id]')
+        .last()
+        .within(() => {
+                cy.get('[data-field=assemblyId]').click()
+        })
+      cy.get(`li[data-value=${assemblyData.data.assemblies[0].id}]`).click({ force: true })
       cy.get('[data-testid=SaveIcon]').click({ force: true })
     })
 
