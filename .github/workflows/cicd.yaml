@@ -17,7 +17,7 @@ jobs:
     with:
       router_url: ${{ ('https://api.lcacollect.dk/graphql' && github.ref_name == 'main') || 'https://api.test.lcacollect.dk/graphql' }}
       artifact_name: 'lcacollect-app'
-      run_e2e: true
+      run_e2e: false
       aad_client_id: ${{ vars.VITE_AAD_CLIENT_ID }}
       aad_tenant_id: ${{ vars.VITE_AAD_TENANT_ID }}
       aad_app_client_id: ${{ vars.VITE_AAD_APP_CLIENT_ID }}

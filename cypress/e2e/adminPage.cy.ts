@@ -41,7 +41,7 @@ describe('Admin Page', () => {
     cy.contains('Template management')
     cy.get(`[data-id=${existingSchemaTemplate.id}]`).within(() => {
       cy.get('[data-field=name]').contains(existingSchemaTemplate.name)
-      cy.get('[data-field=typecode]').contains(existingSchemaTemplate.schema.name)
+      cy.get('[data-field=typecode]').contains(existingSchemaTemplate.schemas[0].name)
     })
 
     cy.get('[data-testid=DeleteOutlinedIcon]').first().click()
@@ -74,7 +74,7 @@ describe('Admin Page', () => {
     cy.contains('button', 'Add Typecode').click()
 
     cy.contains('p', 'Name for import')
-    cy.get('input[type="text"]').first().type(newSchemaTemplate.schema.name)
+    cy.get('input[type="text"]').first().type(newSchemaTemplate.schemas[0].name)
 
     cy.contains('label', 'File')
     cy.get('input[type="file"]').attachFile('../fixtures/test.csv')
