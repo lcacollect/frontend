@@ -42,8 +42,30 @@ You can use `npm link` to set up live reloading of the other `@lcacollect` packa
 - Clone the package that you wish to enable live reload on.
 - In the terminal, go the root folder of the cloned repo and write `npm link` in the terminal
 - Go back to this repo's root folder and write `npm link @lcacollect/{PACKAGE}` to link the package.
+
+Example of a oneliner for linking the `project` package (executed from `lcacollect/frontend/`):
+```bash
+npm link ../shared-project-frontend && npm link @lcacollect/project
+```
+
 - When you make changes to the package, that you wish to see in this app, simply run `npm run build` in the package and
   the changes will available here.
+- To enable hot reloading for a linked project, go to [vite.config.ts](./vite.config.ts) and remove the comment `//` for the linked project you want to enable hot reloading for (NB! Only 1 project at a time). Then open a new terminal in the directory of the linked project and run `npm run build:watch`, to see changes live locally.
+
+Example where the `project` package is enabled for hot reloading:
+```typescript
+optimizeDeps: {
+    exclude: [
+      // '@lcacollect/assembly',
+      // '@lcacollect/documentation',
+      '@lcacollect/project',
+      // '@lcacollect/core',
+      // '@lcacollect/components',
+      // '@lcacollect/e2e-testing',
+    ],
+    ...
+}
+```
 
 ## Folder Structure and Naming
 
@@ -76,4 +98,4 @@ Further documentation for LCAcollect can be found [here](https://github.com/lcac
 Unless otherwise described, the code in this repository is licensed under the Apache-2.0 License. Please note that some
 modules, extensions or code herein might be otherwise licensed. This is indicated either in the root of the containing
 folder under a different license file, or in the respective file's header. If you have any questions, don't hesitate to
-get in touch with us via [email](mailto:chrk@arkitema.com).
+get in touch with us via [email](mailto:molio@molio.dk).
