@@ -23,5 +23,5 @@ const getProjectStageList = () => {
 
 export const Settings: SettingsInterface = {
   domainName: import.meta.env.VITE_DOMAIN_NAME || null,
-  projectStages: getProjectStageList() || null,
+  projectStageList: getProjectStageList() || null,
 }
